@@ -1,0 +1,281 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'motion/react';
+import { Play, RotateCcw, Trophy, Sparkles } from 'lucide-react';
+import confetti from 'canvas-confetti';
+import { playGiftRevealFanfare, playPopClick } from '../../utils/audio';
+
+interface FallingItem {
+  id: number;
+  x: number; // percentage (0 to 90)
+  y: number; // percentage (0 to 100)
+  speed: number;
+  type: 'apple' | 'book' | 'cap' | 'alarm';
+  emoji: string;
+  points: number;
+}
+
+export const CatchAppleGame: React.FC = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(35);
+  const [basketX, setBasketX] = useState(50); // percentage
+  const [gameOver, setGameOver] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<FallingItem[]>([]);
+  const [renderedItems, setRenderedItems] = useState<FallingItem[]>([]);
+  const animFrameId = useRef<number | null>(null);
+  const lastSpawnTime = useRef<number>(0);
+
+  const itemTypes = [
+    { type: 'apple' as const, emoji: '🍎', points: 10, weight: 4 },
+    { type: 'book' as const, emoji: '📚', points: 15, weight: 3 },
+    { type: 'cap' as const, emoji: '🎓', points: 25, weight: 1 },
+    { type: 'alarm' as const, emoji: '⏰', points: -15, weight: 2 },
+  ];
+
+  const startGame = () => {
+    playPopClick();
+    setScore(0);
+    setTimeLeft(35);
+    setGameOver(false);
+    setIsPlaying(true);
+    itemsRef.current = [];
+    setRenderedItems([]);
+    lastSpawnTime.current = Date.now();
+  };
+
+  // Timer countdown
+  useEffect(() => {
+    if (!isPlaying) return;
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          endGame();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
+  const endGame = () => {
+    setIsPlaying(false);
+    setGameOver(true);
+    playGiftRevealFanfare();
+    confetti({ particleCount: 75, spread: 60, origin: { y: 0.6 } });
+    setHighScore((prev) => Math.max(prev, score));
+  };
+
+  // Keyboard controls
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isPlaying) return;
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+        setBasketX((x) => Math.max(5, x - 7));
+      } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        setBasketX((x) => Math.min(92, x + 7));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isPlaying]);
+
+  // Pointer / Mouse drag on stage
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isPlaying || !containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const relativeX = ((e.clientX - rect.left) / rect.width) * 100;
+    setBasketX(Math.max(5, Math.min(92, relativeX)));
+  };
+
+  // Game loop for falling items
+  useEffect(() => {
+    if (!isPlaying) {
+      if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
+      return;
+    }
+
+    const loop = () => {
+      const now = Date.now();
+
+      // Spawn new items every ~700ms
+      if (now - lastSpawnTime.current > 650) {
+        lastSpawnTime.current = now;
+        const pool: typeof itemTypes = [];
+        itemTypes.forEach((it) => {
+          for (let i = 0; i < it.weight; i++) pool.push(it);
+        });
+        const chosen = pool[Math.floor(Math.random() * pool.length)];
+
+        itemsRef.current.push({
+          id: now + Math.random(),
+          x: Math.floor(Math.random() * 85) + 5,
+          y: 0,
+          speed: Math.random() * 0.7 + 0.6,
+          type: chosen.type,
+          emoji: chosen.emoji,
+          points: chosen.points,
+        });
+      }
+
+      // Update positions & check basket collision
+      const remaining: FallingItem[] = [];
+      const basketHitWidth = 14; // percentage
+      const basketYPos = 85;
+
+      for (const item of itemsRef.current) {
+        item.y += item.speed;
+
+        // Check if caught by basket near bottom
+        if (item.y >= basketYPos - 4 && item.y <= basketYPos + 6) {
+          if (Math.abs(item.x - basketX) < basketHitWidth) {
+            // Collision caught!
+            playPopClick();
+            setScore((s) => Math.max(0, s + item.points));
+            continue; // Item collected
+          }
+        }
+
+        // If not fallen off bottom
+        if (item.y < 100) {
+          remaining.push(item);
+        }
+      }
+
+      itemsRef.current = remaining;
+      setRenderedItems([...remaining]);
+
+      animFrameId.current = requestAnimationFrame(loop);
+    };
+
+    animFrameId.current = requestAnimationFrame(loop);
+
+    return () => {
+      if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
+    };
+  }, [isPlaying, basketX]);
+
+  return (
+    <div className="bg-white neo-border neo-shadow p-6 md:p-8 text-[#121212] max-w-xl mx-auto">
+      <div className="text-center mb-4">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#E63946] text-white text-[10px] font-black uppercase tracking-wider neo-border-2 mb-2 neo-shadow-sm">
+          <span>Arcade Mini-Game</span>
+        </div>
+        <h3 className="text-2xl font-black uppercase tracking-tight italic text-[#121212] font-sans">
+          Catch the Wisdom Apples!
+        </h3>
+        <p className="text-xs text-[#121212]/75 mt-0.5 font-bold uppercase tracking-wider">
+          Move your school bag to catch falling apples & books while dodging distracting alarms!
+        </p>
+      </div>
+
+      {/* Top scoreboard */}
+      <div className="flex items-center justify-between bg-[#F1FAEE] p-3 neo-border-2 mb-4 text-xs font-black uppercase neo-shadow-sm">
+        <div className="flex items-center gap-1.5">
+          <span className="text-[#121212]/70">Score:</span>
+          <span className="text-base font-black text-[#121212] font-sans">{score}</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[#121212]/70">Time:</span>
+          <span className={`text-base font-black font-mono ${timeLeft <= 5 ? 'text-[#E63946] animate-pulse' : 'text-[#121212]'}`}>
+            {timeLeft}s
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[#121212]/70">High:</span>
+          <span className="text-[#264653] font-black font-sans">{highScore}</span>
+        </div>
+      </div>
+
+      {/* Game Stage */}
+      <div
+        ref={containerRef}
+        onPointerMove={handlePointerMove}
+        className="relative h-80 bg-[#F1FAEE] neo-border overflow-hidden select-none cursor-ew-resize touch-none grid-paper neo-shadow"
+      >
+        {/* Floating Items */}
+        {renderedItems.map((item) => (
+          <div
+            key={item.id}
+            className="absolute text-2xl -translate-x-1/2 pointer-events-none transition-transform"
+            style={{
+              left: `${item.x}%`,
+              top: `${item.y}%`,
+            }}
+          >
+            {item.emoji}
+          </div>
+        ))}
+
+        {/* Player Basket / Bag */}
+        <div
+          className="absolute bottom-4 -translate-x-1/2 flex flex-col items-center pointer-events-none transition-all duration-75"
+          style={{ left: `${basketX}%` }}
+        >
+          <div className="text-4xl filter drop-shadow-md">🎒</div>
+          <div className="w-12 h-2 bg-[#121212]/40 neo-border-2 mt-0.5" />
+        </div>
+
+        {/* Idle / Game Over Overlay */}
+        {!isPlaying && (
+          <div className="absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-20">
+            {gameOver ? (
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="space-y-3"
+              >
+                <div className="text-4xl">🏆</div>
+                <h4 className="text-xl font-black uppercase tracking-tight italic font-sans text-[#121212]">
+                  Class Dismissed! Final Score: {score}
+                </h4>
+                <p className="text-xs text-[#121212]/80 font-medium">
+                  {score >= 100
+                    ? 'Superb! You gathered an abundance of knowledge!'
+                    : 'Good run! Give it another try for a higher score!'}
+                </p>
+                <button
+                  onClick={startGame}
+                  id="btn-catch-replay"
+                  className="px-6 py-2.5 bg-[#121212] hover:bg-stone-900 text-white font-black uppercase text-xs neo-shadow transition-all cursor-pointer inline-flex items-center gap-1.5 hover:translate-x-[1px] hover:translate-y-[1px]"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Play Again</span>
+                </button>
+              </motion.div>
+            ) : (
+              <div className="space-y-4">
+                <div className="text-4xl animate-bounce">🍎</div>
+                <h4 className="text-xl font-black uppercase tracking-tight italic font-sans text-[#121212]">
+                  Ready to Harvest Wisdom?
+                </h4>
+                <div className="text-xs text-[#121212] max-w-xs space-y-1 font-bold">
+                  <p>Catch: 🍎 (+10) • 📚 (+15) • 🎓 (+25)</p>
+                  <p className="text-[#E63946]">Dodge: ⏰ (-15 alarm clock)</p>
+                  <p className="text-[#264653] pt-1">Use Left/Right arrows or drag mouse/finger.</p>
+                </div>
+                <button
+                  onClick={startGame}
+                  id="btn-catch-start"
+                  className="px-7 py-3 bg-[#121212] hover:bg-stone-900 text-white font-black uppercase text-xs neo-shadow transition-all cursor-pointer inline-flex items-center gap-2 hover:translate-x-[1px] hover:translate-y-[1px]"
+                >
+                  <Play className="w-4 h-4 fill-white" />
+                  <span>Start Game (35s)</span>
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Instructions footer */}
+      <div className="mt-4 text-center text-[11px] text-[#121212]/80 font-bold uppercase tracking-wider">
+        Controls: Drag finger / mouse horizontally, or press <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">←</kbd> <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">→</kbd> or <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">A</kbd> <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">D</kbd>
+      </div>
+    </div>
+  );
+};

@@ -1,0 +1,6 @@
+{
+  "name": "Teachers' Day 2026 Tribute Portal",
+  "description": "A universal Teachers' Day 2026 tribute portal that can be sent to any teacher of any subject without any clicking, featuring heartfelt wishes, interactive greeting cards, letters of gratitude, and celebration honors.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

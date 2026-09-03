@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .neo-border {
+    border: 3px solid #121212;
+  }
+  .neo-border-2 {
+    border: 2px solid #121212;
+  }
+  .neo-shadow {
+    box-shadow: 5px 5px 0px 0px #121212;
+  }
+  .neo-shadow-sm {
+    box-shadow: 2.5px 2.5px 0px 0px #121212;
+  }
+  .neo-shadow-lg {
+    box-shadow: 8px 8px 0px 0px #121212;
+  }
+  .neo-shadow-red {
+    box-shadow: 5px 5px 0px 0px #E63946;
+  }
+  .neo-shadow-amber {
+    box-shadow: 5px 5px 0px 0px #E9C46A;
+  }
+  .neo-shadow-teal {
+    box-shadow: 5px 5px 0px 0px #264653;
+  }
+  .grid-paper {
+    background-image: radial-gradient(#121212 1.2px, transparent 1.2px);
+    background-size: 20px 20px;
+    background-color: rgba(18, 18, 18, 0.02);
+  }
+  .grid-paper-dark {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.2px, transparent 1.2px);
+    background-size: 20px 20px;
+    background-color: rgba(18, 18, 18, 0.6);
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
