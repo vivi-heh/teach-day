@@ -15,6 +15,7 @@ import {
   INITIAL_SHOUTOUTS,
 } from './data/mockData';
 import { Teacher, GreetingCard, Shoutout, CelebrationRevealItem } from './types';
+import { Apple, Sparkles, Heart, Mail, MessageSquare, Award } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'cards' | 'games' | 'memories'>('dashboard');
@@ -230,11 +231,15 @@ export default function App() {
       <footer className="bg-white border-t-[3px] border-[#121212] text-[#121212] py-10 px-4 sm:px-6 lg:px-8 text-center text-xs neo-shadow-sm">
         <div className="max-w-4xl mx-auto space-y-4">
           <div className="flex items-center justify-center gap-2">
-            <span className="neo-border bg-[#E9C46A] p-1.5 text-base">🍎</span>
-            <span className="text-xl font-black uppercase tracking-tight italic text-[#121212]">
+            <span className="neo-border bg-[#E9C46A] p-1.5 flex items-center justify-center">
+              <Apple className="w-5 h-5 text-[#121212]" />
+            </span>
+            <span className="text-xl font-black uppercase tracking-tight italic text-[#121212] heading-pop">
               Teachers’ Day <span className="text-[#E63946]">2026</span> // Universal Tribute Portal
             </span>
-            <span className="neo-border bg-[#A8DADC] p-1.5 text-base">⭐</span>
+            <span className="neo-border bg-[#A8DADC] p-1.5 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-[#121212]" />
+            </span>
           </div>
 
           <div className="bg-[#F1FAEE] neo-border-2 p-4 max-w-xl mx-auto neo-shadow-sm text-[#121212]">
@@ -244,10 +249,18 @@ export default function App() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-[#121212] font-black uppercase text-[11px] tracking-wider">
-            <span className="bg-[#E9C46A] neo-border-2 px-3 py-1">🍎 Dedicated to Every Teacher</span>
-            <span className="bg-[#F4A261] neo-border-2 px-3 py-1">💌 {cards.length} Wishes & Cards</span>
-            <span className="bg-[#A8DADC] neo-border-2 px-3 py-1">💬 {shoutouts.length} Gratitude Notes</span>
-            <span className="bg-[#E63946] text-white neo-border-2 px-3 py-1">★ 2026 Commendation</span>
+            <span className="bg-[#E9C46A] neo-border-2 px-3 py-1 flex items-center gap-1.5">
+              <Heart className="w-3.5 h-3.5 text-[#121212] fill-current" /> Dedicated to Every Teacher
+            </span>
+            <span className="bg-[#F4A261] neo-border-2 px-3 py-1 flex items-center gap-1.5">
+              <Mail className="w-3.5 h-3.5 text-[#121212]" /> {cards.length} Wishes & Cards
+            </span>
+            <span className="bg-[#A8DADC] neo-border-2 px-3 py-1 flex items-center gap-1.5">
+              <MessageSquare className="w-3.5 h-3.5 text-[#121212]" /> {shoutouts.length} Gratitude Notes
+            </span>
+            <span className="bg-[#E63946] text-white neo-border-2 px-3 py-1 flex items-center gap-1.5">
+              <Award className="w-3.5 h-3.5 text-white" /> 2026 Commendation
+            </span>
           </div>
 
           <p className="text-[#121212] text-xs pt-3 font-bold uppercase tracking-wider">

@@ -1,6 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Play, RotateCcw, Trophy, Sparkles } from 'lucide-react';
+import {
+  Play,
+  RotateCcw,
+  Trophy,
+  Sparkles,
+  Apple,
+  BookOpen,
+  GraduationCap,
+  BellOff,
+  Laptop,
+  Briefcase,
+} from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playGiftRevealFanfare, playPopClick } from '../../utils/audio';
 
@@ -9,8 +20,7 @@ interface FallingItem {
   x: number; // percentage (0 to 90)
   y: number; // percentage (0 to 100)
   speed: number;
-  type: 'apple' | 'book' | 'cap' | 'alarm';
-  emoji: string;
+  type: 'apple' | 'book' | 'laptop' | 'cap' | 'alarm';
   points: number;
 }
 
@@ -29,11 +39,47 @@ export const CatchAppleGame: React.FC = () => {
   const lastSpawnTime = useRef<number>(0);
 
   const itemTypes = [
-    { type: 'apple' as const, emoji: '🍎', points: 10, weight: 4 },
-    { type: 'book' as const, emoji: '📚', points: 15, weight: 3 },
-    { type: 'cap' as const, emoji: '🎓', points: 25, weight: 1 },
-    { type: 'alarm' as const, emoji: '⏰', points: -15, weight: 2 },
+    { type: 'apple' as const, points: 10, weight: 4 },
+    { type: 'book' as const, points: 15, weight: 3 },
+    { type: 'laptop' as const, points: 20, weight: 2 },
+    { type: 'cap' as const, points: 25, weight: 1 },
+    { type: 'alarm' as const, points: -15, weight: 2 },
   ];
+
+  const renderItemIcon = (type: FallingItem['type']) => {
+    switch (type) {
+      case 'apple':
+        return (
+          <div className="p-2 bg-rose-500 text-white rounded-full neo-border-2 shadow-sm">
+            <Apple className="w-5 h-5 fill-white" />
+          </div>
+        );
+      case 'book':
+        return (
+          <div className="p-2 bg-amber-500 text-white rounded-md neo-border-2 shadow-sm">
+            <BookOpen className="w-5 h-5 fill-white/20" />
+          </div>
+        );
+      case 'laptop':
+        return (
+          <div className="p-2 bg-cyan-600 text-white rounded-md neo-border-2 shadow-sm">
+            <Laptop className="w-5 h-5" />
+          </div>
+        );
+      case 'cap':
+        return (
+          <div className="p-2 bg-[#264653] text-white rounded-md neo-border-2 shadow-sm">
+            <GraduationCap className="w-5 h-5" />
+          </div>
+        );
+      case 'alarm':
+        return (
+          <div className="p-2 bg-[#E63946] text-white rounded-full neo-border-2 animate-bounce shadow-sm">
+            <BellOff className="w-5 h-5" />
+          </div>
+        );
+    }
+  };
 
   const startGame = () => {
     playPopClick();
@@ -102,7 +148,7 @@ export const CatchAppleGame: React.FC = () => {
     const loop = () => {
       const now = Date.now();
 
-      // Spawn new items every ~700ms
+      // Spawn new items every ~650ms
       if (now - lastSpawnTime.current > 650) {
         lastSpawnTime.current = now;
         const pool: typeof itemTypes = [];
@@ -117,7 +163,6 @@ export const CatchAppleGame: React.FC = () => {
           y: 0,
           speed: Math.random() * 0.7 + 0.6,
           type: chosen.type,
-          emoji: chosen.emoji,
           points: chosen.points,
         });
       }
@@ -165,11 +210,11 @@ export const CatchAppleGame: React.FC = () => {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#E63946] text-white text-[10px] font-black uppercase tracking-wider neo-border-2 mb-2 neo-shadow-sm">
           <span>Arcade Mini-Game</span>
         </div>
-        <h3 className="text-2xl font-black uppercase tracking-tight italic text-[#121212] font-sans">
-          Catch the Wisdom Apples!
+        <h3 className="text-2xl font-black uppercase tracking-tight italic text-[#121212] font-sans heading-pop">
+          Catch the Wisdom Badges!
         </h3>
         <p className="text-xs text-[#121212]/75 mt-0.5 font-bold uppercase tracking-wider">
-          Move your school bag to catch falling apples & books while dodging distracting alarms!
+          Catch falling apples, textbooks, and computer devices while dodging distracting alarms!
         </p>
       </div>
 
@@ -201,13 +246,13 @@ export const CatchAppleGame: React.FC = () => {
         {renderedItems.map((item) => (
           <div
             key={item.id}
-            className="absolute text-2xl -translate-x-1/2 pointer-events-none transition-transform"
+            className="absolute -translate-x-1/2 pointer-events-none transition-transform"
             style={{
               left: `${item.x}%`,
               top: `${item.y}%`,
             }}
           >
-            {item.emoji}
+            {renderItemIcon(item.type)}
           </div>
         ))}
 
@@ -216,8 +261,11 @@ export const CatchAppleGame: React.FC = () => {
           className="absolute bottom-4 -translate-x-1/2 flex flex-col items-center pointer-events-none transition-all duration-75"
           style={{ left: `${basketX}%` }}
         >
-          <div className="text-4xl filter drop-shadow-md">🎒</div>
-          <div className="w-12 h-2 bg-[#121212]/40 neo-border-2 mt-0.5" />
+          <div className="p-3 bg-[#E9C46A] neo-border-2 text-[#121212] neo-shadow-sm rounded-lg flex items-center gap-1.5">
+            <Briefcase className="w-5 h-5 text-[#121212]" />
+            <span className="text-[10px] font-black uppercase tracking-tight">Satchel</span>
+          </div>
+          <div className="w-14 h-2 bg-[#121212]/40 neo-border-2 mt-0.5" />
         </div>
 
         {/* Idle / Game Over Overlay */}
@@ -229,13 +277,15 @@ export const CatchAppleGame: React.FC = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 className="space-y-3"
               >
-                <div className="text-4xl">🏆</div>
-                <h4 className="text-xl font-black uppercase tracking-tight italic font-sans text-[#121212]">
+                <div className="w-16 h-16 bg-[#E9C46A] neo-border-2 mx-auto flex items-center justify-center neo-shadow-sm">
+                  <Trophy className="w-8 h-8 text-[#121212]" />
+                </div>
+                <h4 className="text-xl font-black uppercase tracking-tight italic font-sans text-[#121212] heading-pop">
                   Class Dismissed! Final Score: {score}
                 </h4>
                 <p className="text-xs text-[#121212]/80 font-medium">
                   {score >= 100
-                    ? 'Superb! You gathered an abundance of knowledge!'
+                    ? 'Superb! You gathered an abundance of knowledge and innovation!'
                     : 'Good run! Give it another try for a higher score!'}
                 </p>
                 <button
@@ -249,14 +299,25 @@ export const CatchAppleGame: React.FC = () => {
               </motion.div>
             ) : (
               <div className="space-y-4">
-                <div className="text-4xl animate-bounce">🍎</div>
-                <h4 className="text-xl font-black uppercase tracking-tight italic font-sans text-[#121212]">
-                  Ready to Harvest Wisdom?
+                <div className="w-16 h-16 bg-[#E9C46A] neo-border-2 mx-auto flex items-center justify-center neo-shadow-sm">
+                  <Apple className="w-8 h-8 text-[#E63946] fill-[#E63946]" />
+                </div>
+                <h4 className="text-xl font-black uppercase tracking-tight italic font-sans text-[#121212] heading-pop">
+                  Ready to Harvest Wisdom & Code?
                 </h4>
-                <div className="text-xs text-[#121212] max-w-xs space-y-1 font-bold">
-                  <p>Catch: 🍎 (+10) • 📚 (+15) • 🎓 (+25)</p>
-                  <p className="text-[#E63946]">Dodge: ⏰ (-15 alarm clock)</p>
-                  <p className="text-[#264653] pt-1">Use Left/Right arrows or drag mouse/finger.</p>
+                <div className="text-xs text-[#121212] max-w-xs space-y-1.5 font-bold text-left bg-[#F1FAEE] p-3 neo-border-2">
+                  <p className="flex items-center gap-1.5 text-emerald-800">
+                    <Apple className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
+                    <span>Apples (+10) • Books (+15)</span>
+                  </p>
+                  <p className="flex items-center gap-1.5 text-cyan-800">
+                    <Laptop className="w-3.5 h-3.5 text-cyan-600" />
+                    <span>Laptops (+20) • Laurels (+25)</span>
+                  </p>
+                  <p className="flex items-center gap-1.5 text-[#E63946]">
+                    <BellOff className="w-3.5 h-3.5 text-[#E63946]" />
+                    <span>Dodge Alarms (-15 penalty)</span>
+                  </p>
                 </div>
                 <button
                   onClick={startGame}
@@ -272,9 +333,27 @@ export const CatchAppleGame: React.FC = () => {
         )}
       </div>
 
+      {/* Mobile Touch Controls */}
+      <div className="grid grid-cols-2 gap-3 mt-3 sm:hidden">
+        <button
+          onClick={() => setBasketX((x) => Math.max(5, x - 12))}
+          id="btn-catch-left"
+          className="py-3 bg-[#F1FAEE] hover:bg-white text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm flex items-center justify-center gap-2 active:translate-y-[1px] min-h-[48px]"
+        >
+          <span>◀ Move Left</span>
+        </button>
+        <button
+          onClick={() => setBasketX((x) => Math.min(92, x + 12))}
+          id="btn-catch-right"
+          className="py-3 bg-[#F1FAEE] hover:bg-white text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm flex items-center justify-center gap-2 active:translate-y-[1px] min-h-[48px]"
+        >
+          <span>Move Right ▶</span>
+        </button>
+      </div>
+
       {/* Instructions footer */}
-      <div className="mt-4 text-center text-[11px] text-[#121212]/80 font-bold uppercase tracking-wider">
-        Controls: Drag finger / mouse horizontally, or press <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">←</kbd> <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">→</kbd> or <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">A</kbd> <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">D</kbd>
+      <div className="mt-3 text-center text-[11px] text-[#121212]/80 font-bold uppercase tracking-wider">
+        Controls: Drag finger / mouse across stage, use buttons above, or press <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">←</kbd> <kbd className="bg-[#F1FAEE] px-1.5 py-0.5 neo-border-2 text-[#121212]">→</kbd>
       </div>
     </div>
   );

@@ -259,6 +259,49 @@ export const INITIAL_TEACHERS: Teacher[] = [
       giftUnlocked: false,
     },
   },
+  {
+    id: 'computer-science-tech',
+    name: 'Computer Science, Coding & AI Innovation Mentor',
+    title: 'Senior Guide in Algorithms, Software Architecture, Web & Artificial Intelligence',
+    department: 'Computer Science & Technology',
+    avatar: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&auto=format&fit=crop&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&auto=format&fit=crop&q=80',
+    experienceYears: 15,
+    quote: 'Coding is not about memorizing syntax; it is the art of breaking impossible challenges into logical, elegant steps with infinite resilience.',
+    bio: 'Pioneering student coding hackathons, app development labs, and demystifying data structures, web engineering, and machine learning with infectious enthusiasm and endless patience.',
+    accolades: [
+      {
+        title: 'Master Debugger & Compassion Citation',
+        description: 'Renowned for sitting patiently beside learners through syntax bugs until that radiant "It works!" eureka moment.',
+        icon: 'Terminal',
+      },
+      {
+        title: 'Future Innovators Accelerator',
+        description: 'Mentored dozens of students to deploy their very first open-source web apps, mobile tools, and AI prototypes.',
+        icon: 'Code2',
+      },
+      {
+        title: 'Algorithmic Virtuoso Medal',
+        description: 'Designed interactive visual algorithm playgrounds that turned intimidating computational theory into captivating games.',
+        icon: 'Cpu',
+      },
+    ],
+    stats: {
+      applesReceived: 295,
+      thankYouNotes: 124,
+      hearts: 680,
+      classesTaught: 1390,
+    },
+    gift: {
+      giftType: 'Quantum Silicon Processor & Terminal of Innovation',
+      giftTitle: 'Architect of Computational Minds Laureate',
+      badgeName: 'Master of Modern Code',
+      revealQuote: 'The computer is a bicycle for our minds — but a great teacher gives us the balance and confidence to steer into the future.',
+      studentMessage: 'Dear Mentor, thank you for teaching us that a syntax error is never a failure, but the computer gently whispering how to succeed. You inspired us to build apps, solve tough logic problems, and believe that we can code the future. Happy Teachers’ Day!',
+      virtualTrophy: 'Laptop',
+      giftUnlocked: false,
+    },
+  },
 ];
 
 export const INITIAL_CARDS: GreetingCard[] = [
@@ -346,9 +389,45 @@ export const INITIAL_CARDS: GreetingCard[] = [
     reactions: { love: 94, apple: 81, star: 73, respect: 69 },
     date: 'Teachers’ Day 2026',
   },
+  {
+    id: 'card-7',
+    teacherId: 'computer-science-tech',
+    teacherName: 'Computer Science, Coding & AI Innovation Mentor',
+    senderName: 'The Student Developers & Hackathon Club',
+    senderRole: 'Aspiring Software Engineers',
+    theme: 'cyber',
+    headline: 'To the Mentor Who Taught Us to Debug Life’s Complex Loops',
+    frontDesign: 'Algorithmic Binary Matrix & Golden Terminal',
+    message: 'When our code crashed with red errors and infinite loops, you never let us feel defeated. You sat with us, laughed, and showed us that every bug is simply a puzzle waiting for logical patience. Thank you for opening the limitless universe of software, web development, and algorithms to us, and for teaching us that humans write the future with code and empathy!',
+    favoriteQuote: '“The best way to predict the future is to invent it.” — Alan Kay',
+    reactions: { love: 168, apple: 110, star: 145, respect: 120 },
+    date: 'Teachers’ Day 2026',
+  },
 ];
 
 export const INITIAL_SHOUTOUTS: Shoutout[] = [
+  {
+    id: 'shout-cs-1',
+    studentName: 'A Grateful Student in the Computer Lab',
+    gradeOrClass: 'Computer Science Pupil',
+    teacherId: 'computer-science-tech',
+    teacherName: 'Computer Science & Coding Mentor',
+    message: 'Huge shout-out to our Computer Science teacher! When our team’s web project crashed 20 minutes before presentation, you calmly walked us through git revert and debugging with a reassuring smile. We got top honors, but you gave us our real victory: resilience under pressure!',
+    tag: 'Life Lesson',
+    timestamp: 'Just now',
+    likes: 58,
+  },
+  {
+    id: 'shout-cs-2',
+    studentName: 'A First-Time Coder',
+    gradeOrClass: 'Intro to Python & Web',
+    teacherId: 'computer-science-tech',
+    teacherName: 'Computer Science & Coding Mentor',
+    message: 'I walked into your computer class terrified that coding was only for geniuses. In one semester, you made algorithms feel like building LEGO blocks. Today, I launched my first website. Thank you for believing in me!',
+    tag: 'Inspirational',
+    timestamp: '18 mins ago',
+    likes: 82,
+  },
   {
     id: 'shout-1',
     studentName: 'A Grateful Student in Room 304',
@@ -478,6 +557,16 @@ export const CLASSROOM_PHOTOS: ClassroomPhoto[] = [
     year: '2024',
     likes: 167,
   },
+  {
+    id: 'photo-7',
+    title: 'Hackathon & Web Dev Project Showcase',
+    caption: 'Computer Science & Technology Mentor giving thumbs-up as students test their interactive web app.',
+    imageUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80',
+    teacherName: 'Computer Science, Coding & AI Innovation Mentor',
+    event: 'Annual Innovation Hackathon',
+    year: '2025',
+    likes: 215,
+  },
 ];
 
 export const TRIVIA_QUESTIONS: TriviaQuestion[] = [
@@ -509,6 +598,32 @@ export const TRIVIA_QUESTIONS: TriviaQuestion[] = [
   },
   {
     id: 3,
+    question: 'Who was the pioneering mathematician who wrote the world’s very first computer algorithm and envisioned computers creating music and art?',
+    options: [
+      'Ada Lovelace',
+      'Alan Turing',
+      'Charles Babbage',
+      'Grace Hopper',
+    ],
+    correctIndex: 0,
+    funFact: 'Ada Lovelace collaborated with mentor Charles Babbage on the Analytical Engine in 1843, realizing that computers could manipulate symbols beyond numbers. Her mentor called her the "Enchantress of Numbers"!',
+    teacherWisdom: 'Great educators inspire us to see creative, human art within rigorous logic and code.',
+  },
+  {
+    id: 4,
+    question: 'Which legendary computer scientist, educator, and Navy Rear Admiral famously helped popularize the term "computer bug" after removing an actual moth from a relay?',
+    options: [
+      'Margaret Hamilton',
+      'Grace Hopper',
+      'Katherine Johnson',
+      'Hedy Lamarr',
+    ],
+    correctIndex: 1,
+    funFact: 'Grace Hopper was also a passionate college professor who carried nanosecond-length wire pieces to visually show students how fast light travels through computer circuits!',
+    teacherWisdom: 'The greatest technical teachers turn abstract invisible concepts into tangible, unforgettable wonders.',
+  },
+  {
+    id: 5,
     question: 'Who was the pioneering teacher that taught Helen Keller how to communicate through touch and fingerspelling?',
     options: [
       'Maria Montessori',
@@ -521,7 +636,7 @@ export const TRIVIA_QUESTIONS: TriviaQuestion[] = [
     teacherWisdom: 'With dedicated guidance and limitless patience, boundaries that seem insurmountable simply dissolve.',
   },
   {
-    id: 4,
+    id: 6,
     question: 'Which ancient Greek philosopher was the personal mentor of Alexander the Great?',
     options: [
       'Socrates',
@@ -534,7 +649,7 @@ export const TRIVIA_QUESTIONS: TriviaQuestion[] = [
     teacherWisdom: 'Great mentorship shapes not merely our career knowledge, but our ethical core and human character.',
   },
   {
-    id: 5,
+    id: 7,
     question: 'What is the celebrated "Pygmalion Effect" in educational psychology?',
     options: [
       'Students retain lessons better when classical music plays in class',
@@ -550,6 +665,21 @@ export const TRIVIA_QUESTIONS: TriviaQuestion[] = [
 
 export const INITIAL_STUDENT_GIFTS: StudentGift[] = [
   {
+    id: 'gift-cs-1',
+    teacherId: 'computer-science-tech',
+    teacherName: 'Computer Science, Coding & AI Innovation Mentor',
+    studentName: 'A Grateful Student in the Coding Club',
+    studentGroup: 'Student Developers Guild',
+    giftType: 'Quantum Terminal',
+    giftName: 'Algorithmic Virtuoso Terminal of Wisdom',
+    giftIcon: 'Terminal',
+    wrapStyle: 'cyber',
+    animationType: 'matrix',
+    message: 'Thank you for teaching us that every runtime error is an invitation to think clearly. You inspired us to code with heart and build things that help people!',
+    timestamp: 'Just now',
+    unlocked: true,
+  },
+  {
     id: 'gift-1',
     teacherId: 'literature-expression',
     teacherName: 'Literature & Creative Expression Mentor',
@@ -557,7 +687,7 @@ export const INITIAL_STUDENT_GIFTS: StudentGift[] = [
     studentGroup: 'Creative Writing Society',
     giftType: 'Golden Quill',
     giftName: 'Everlasting Inspiration Quill',
-    giftIcon: '✒️',
+    giftIcon: 'Feather',
     wrapStyle: 'crimson',
     animationType: 'origami',
     message: 'For every red ink note that turned into a blossom of self-belief. You gave voice to our shyest dreams and taught us how to write with our hearts!',
@@ -572,7 +702,7 @@ export const INITIAL_STUDENT_GIFTS: StudentGift[] = [
     studentGroup: 'Alumni Committee',
     giftType: 'Star Lantern',
     giftName: 'Beacon of Empathy Lantern',
-    giftIcon: '🏮',
+    giftIcon: 'Sparkles',
     wrapStyle: 'gold',
     animationType: 'blossom',
     message: 'Even years later in university auditoriums, we remember the quiet dignity with which you listened to every student. Thank you for your warmth!',
@@ -587,7 +717,7 @@ export const INITIAL_STUDENT_GIFTS: StudentGift[] = [
     studentGroup: 'Robotics Squad',
     giftType: 'Precision Microscope',
     giftName: 'Subatomic Wonder Prism',
-    giftIcon: '🔬',
+    giftIcon: 'Cpu',
     wrapStyle: 'teal',
     animationType: 'fireworks',
     message: 'Thank you for staying late to help us debug stepper motors and for teaching us that every error is simply physics waiting to be understood!',
@@ -602,7 +732,7 @@ export const INITIAL_STUDENT_GIFTS: StudentGift[] = [
     studentGroup: 'Math Olympiad Circle',
     giftType: 'Golden Apple',
     giftName: 'Fibonacci Crystal Apple',
-    giftIcon: '🍎',
+    giftIcon: 'Apple',
     wrapStyle: 'gold',
     animationType: 'chalkboard',
     message: 'You took calculus and turned it into pure harmony. Thank you for never giving up on our questions and for believing we could solve it!',
@@ -617,7 +747,7 @@ export const INITIAL_STUDENT_GIFTS: StudentGift[] = [
     studentGroup: 'Debate Society',
     giftType: 'Laurel Trophy',
     giftName: 'Champion Mentor Laurel',
-    giftIcon: '🏆',
+    giftIcon: 'Trophy',
     wrapStyle: 'ochre',
     animationType: 'trophy',
     message: 'Thank you for teaching us how to stand for justice, think critically about the past, and listen to all sides with humility and respect!',
@@ -632,7 +762,7 @@ export const INITIAL_STUDENT_GIFTS: StudentGift[] = [
     studentGroup: 'Studio Arts Guild',
     giftType: 'Master Palette',
     giftName: 'Chromatic Prism of Gratitude',
-    giftIcon: '🎨',
+    giftIcon: 'Palette',
     wrapStyle: 'slate',
     animationType: 'balloons',
     message: 'You showed us that mistakes on canvas are just beginnings of new compositions. Thank you for creating our favorite sanctuary!',

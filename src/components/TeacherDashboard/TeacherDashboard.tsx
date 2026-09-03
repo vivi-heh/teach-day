@@ -25,6 +25,11 @@ import {
   Leaf,
   Sun,
   Scale,
+  Apple,
+  Users,
+  PartyPopper,
+  Flower2,
+  PenTool,
 } from 'lucide-react';
 import { Teacher, GreetingCard, Shoutout, StudentGift } from '../../types';
 import { GiftSurpriseModal } from './GiftSurpriseModal';
@@ -91,8 +96,8 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
   const handleSendAppreciation = (type: 'apple' | 'heart' | 'highfive') => {
     playPopClick();
     onSendReaction(currentTeacher.id, type);
-    const emojiMap = { apple: '🍎 +1 Apple Gifted!', heart: '❤️ +1 High-Five!', highfive: '✋ Awesome Mentorship!' };
-    setFloatingReaction({ text: emojiMap[type], id: Date.now() });
+    const textMap = { apple: '+1 Apple Gifted!', heart: '+1 High-Five!', highfive: 'Awesome Mentorship!' };
+    setFloatingReaction({ text: textMap[type], id: Date.now() });
     setTimeout(() => {
       setFloatingReaction(null);
     }, 1800);
@@ -138,8 +143,10 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="neo-border-2 bg-[#F1FAEE] p-1 text-base">👩‍🏫👨‍🏫</span>
-              <h2 className="text-xl font-black uppercase tracking-tight italic font-sans text-[#121212]">
+              <span className="neo-border-2 bg-[#F1FAEE] p-1.5 flex items-center justify-center">
+                <Users className="w-5 h-5 text-[#121212]" />
+              </span>
+              <h2 className="text-xl font-black uppercase tracking-tight italic font-sans text-[#121212] heading-pop">
                 Educator <span className="text-[#E63946]">Roster</span> & Tribute Dashboards
               </h2>
             </div>
@@ -199,8 +206,8 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                     referrerPolicy="no-referrer"
                   />
                   {teacher.gift.giftUnlocked && (
-                    <div className="absolute -top-1 -right-1 bg-[#E63946] text-white p-0.5 text-[9px] font-black border border-[#121212]" title="Gift Unlocked">
-                      ✨
+                    <div className="absolute -top-1 -right-1 bg-[#E63946] text-white p-0.5 text-[9px] font-black border border-[#121212] flex items-center justify-center" title="Gift Unlocked">
+                      <Sparkles className="w-2.5 h-2.5 text-white" />
                     </div>
                   )}
                 </div>
@@ -236,23 +243,23 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
           {/* Department badge top right */}
-          <div className="absolute top-4 right-4 flex items-center gap-2">
-            <span className="px-3 py-1 bg-[#F1FAEE] neo-border-2 text-[#121212] text-xs font-black uppercase tracking-wider neo-shadow-sm">
+          <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center gap-1.5 sm:gap-2 flex-wrap justify-end max-w-[80%]">
+            <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-[#F1FAEE] neo-border-2 text-[#121212] text-[10px] sm:text-xs font-black uppercase tracking-wider neo-shadow-sm">
               {currentTeacher.department}
             </span>
-            <span className="px-3 py-1 bg-[#E63946] neo-border-2 text-white text-xs font-black uppercase tracking-wider neo-shadow-sm flex items-center gap-1">
-              <Award className="w-3.5 h-3.5 text-white" />
-              {currentTeacher.experienceYears} Years Guiding
+            <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-[#E63946] neo-border-2 text-white text-[10px] sm:text-xs font-black uppercase tracking-wider neo-shadow-sm flex items-center gap-1">
+              <Award className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
+              <span>{currentTeacher.experienceYears} Yrs Guiding</span>
             </span>
           </div>
         </div>
 
         {/* Profile Content Details */}
-        <div className="px-6 sm:px-8 pb-8 -mt-20 sm:-mt-24 relative z-10">
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-6">
+        <div className="px-4 sm:px-8 pb-6 sm:pb-8 -mt-16 sm:-mt-24 relative z-10">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-5 sm:gap-6 mb-6">
             {/* Avatar & Title info */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-end gap-5">
-              <div className="relative w-28 h-28 sm:w-36 sm:h-36 neo-border bg-[#F1FAEE] neo-shadow overflow-hidden shrink-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4 sm:gap-5 w-full md:w-auto">
+              <div className="relative w-24 h-24 sm:w-36 sm:h-36 neo-border bg-[#F1FAEE] neo-shadow overflow-hidden shrink-0">
                 <img
                   src={currentTeacher.avatar}
                   alt={currentTeacher.name}
@@ -260,54 +267,54 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                   referrerPolicy="no-referrer"
                 />
                 {currentTeacher.gift.giftUnlocked && (
-                  <div className="absolute bottom-1 right-1 bg-[#E9C46A] border-2 border-[#121212] text-[#121212] px-1.5 py-0.5 text-[10px] font-black uppercase flex items-center gap-0.5">
-                    <span>🏆</span> Honored
+                  <div className="absolute bottom-1 right-1 bg-[#E9C46A] border-2 border-[#121212] text-[#121212] px-1.5 py-0.5 text-[9px] sm:text-[10px] font-black uppercase flex items-center gap-1">
+                    <Trophy className="w-3 h-3 text-[#121212]" /> Honored
                   </div>
                 )}
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h1 className="text-2xl sm:text-4xl font-black uppercase tracking-tight italic text-[#121212] font-sans">
+                  <h1 className="text-xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight italic text-[#121212] font-sans heading-pop">
                     {currentTeacher.name}
                   </h1>
-                  <span className="px-2.5 py-0.5 bg-[#A8DADC] neo-border-2 text-[#121212] text-[10px] font-black uppercase tracking-wider">
+                  <span className="px-2 py-0.5 bg-[#A8DADC] neo-border-2 text-[#121212] text-[10px] font-black uppercase tracking-wider">
                     Featured Mentor
                   </span>
                 </div>
-                <p className="text-sm sm:text-base text-[#E63946] font-black uppercase tracking-wide mt-1">
+                <p className="text-xs sm:text-base text-[#E63946] font-black uppercase tracking-wide mt-1">
                   {currentTeacher.title}
                 </p>
-                <p className="text-xs text-[#121212]/80 mt-2 max-w-xl font-medium leading-relaxed">
+                <p className="text-xs text-[#121212]/80 mt-1.5 sm:mt-2 max-w-xl font-medium leading-relaxed">
                   {currentTeacher.bio}
                 </p>
               </div>
             </div>
 
             {/* Quick Action Appreciation Buttons */}
-            <div className="relative flex flex-wrap items-center gap-2.5 bg-[#F1FAEE] p-2 neo-border-2 self-stretch md:self-auto justify-center neo-shadow-sm">
+            <div className="relative grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 bg-[#F1FAEE] p-2 neo-border-2 w-full md:w-auto justify-center neo-shadow-sm">
               <button
                 onClick={() => handleSendAppreciation('apple')}
                 id="btn-send-apple"
-                className="flex items-center gap-1.5 px-3.5 py-2 bg-[#E63946] hover:bg-[#d62839] text-white font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none"
+                className="flex items-center justify-center gap-1.5 px-3 py-2.5 sm:py-2 bg-[#E63946] hover:bg-[#d62839] text-white font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none min-h-[44px]"
               >
-                <span>🍎</span>
+                <Apple className="w-3.5 h-3.5 text-white fill-current" />
                 <span>Give Apple</span>
               </button>
 
               <button
                 onClick={() => handleSendAppreciation('heart')}
                 id="btn-send-highfive"
-                className="flex items-center gap-1.5 px-3.5 py-2 bg-[#F4A261] hover:bg-[#e79250] text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none"
+                className="flex items-center justify-center gap-1.5 px-3 py-2.5 sm:py-2 bg-[#F4A261] hover:bg-[#e79250] text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none min-h-[44px]"
               >
-                <span>❤️</span>
+                <Heart className="w-3.5 h-3.5 text-[#121212] fill-current" />
                 <span>High-Five</span>
               </button>
 
               <button
                 onClick={() => onOpenCreateCard(currentTeacher.id)}
                 id="btn-write-tribute-card"
-                className="flex items-center gap-1.5 px-3.5 py-2 bg-[#A8DADC] hover:bg-[#90c9cc] text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none"
+                className="flex items-center justify-center gap-1.5 px-3 py-2.5 sm:py-2 bg-[#A8DADC] hover:bg-[#90c9cc] text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none min-h-[44px]"
               >
                 <BookOpen className="w-3.5 h-3.5 text-[#121212]" />
                 <span>Write Card</span>
@@ -317,10 +324,10 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                 <button
                   onClick={() => onOpenSendGiftModal(currentTeacher.id)}
                   id="btn-send-gift-action"
-                  className="flex items-center gap-1.5 px-3.5 py-2 bg-[#E9C46A] hover:bg-yellow-400 text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none"
+                  className="flex items-center justify-center gap-1.5 px-3 py-2.5 sm:py-2 bg-[#E9C46A] hover:bg-yellow-400 text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none min-h-[44px]"
                 >
                   <Gift className="w-3.5 h-3.5 text-[#121212]" />
-                  <span>Send Gift 🎁</span>
+                  <span>Send Gift</span>
                 </button>
               )}
 
@@ -393,9 +400,13 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   onClick={() => setIsGiftModalOpen(true)}
-                  className="w-20 h-20 sm:w-24 sm:h-24 neo-border bg-[#F1FAEE] neo-shadow-sm flex items-center justify-center text-4xl cursor-pointer shrink-0"
+                  className="w-20 h-20 sm:w-24 sm:h-24 neo-border bg-[#F1FAEE] neo-shadow-sm flex items-center justify-center cursor-pointer shrink-0"
                 >
-                  {currentTeacher.gift.giftUnlocked ? '🏆' : '🎁'}
+                  {currentTeacher.gift.giftUnlocked ? (
+                    <Trophy className="w-10 h-10 text-[#121212]" />
+                  ) : (
+                    <Gift className="w-10 h-10 text-[#121212]" />
+                  )}
                 </motion.div>
 
                 <div>
@@ -403,7 +414,7 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                     <Sparkles className="w-3 h-3 text-white" />
                     <span>Special Surprise Dedication Area</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight italic text-[#121212]">
+                  <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight italic text-[#121212] heading-pop">
                     {currentTeacher.gift.giftUnlocked
                       ? `Unlocked: ${currentTeacher.gift.giftTitle}`
                       : `Surprise Dedication Box for ${currentTeacher.name}`}
@@ -442,7 +453,7 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
         <section className="bg-[#E9C46A] neo-border neo-shadow p-6 text-[#121212] space-y-4">
           <div className="flex items-center gap-2 pb-2 border-b-2 border-[#121212]">
             <Award className="w-5 h-5 text-[#121212]" />
-            <h3 className="font-black uppercase tracking-tight text-lg italic text-[#121212]">
+            <h3 className="font-black uppercase tracking-tight text-lg italic text-[#121212] heading-pop">
               Honors & Accolades
             </h3>
           </div>
@@ -470,7 +481,7 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
 
           <div className="pt-2">
             <div className="bg-[#F1FAEE] neo-border-2 p-4 text-center neo-shadow-sm">
-              <span className="text-2xl mb-1 block">⭐</span>
+              <Sparkles className="w-6 h-6 text-amber-500 mx-auto mb-1" />
               <h5 className="text-[10px] font-black uppercase tracking-widest text-[#E63946]">
                 Student Testimonial Highlight
               </h5>
@@ -486,7 +497,7 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           <div className="flex items-center justify-between pb-2 border-b-2 border-[#121212]">
             <div className="flex items-center gap-2">
               <MessageSquareHeart className="w-5 h-5 text-[#E63946]" />
-              <h3 className="font-black uppercase tracking-tight text-lg italic text-[#121212]">
+              <h3 className="font-black uppercase tracking-tight text-lg italic text-[#121212] heading-pop">
                 Wishes Wall for {currentTeacher.name}
               </h3>
               <span className="px-2 py-0.5 neo-border-2 bg-[#A8DADC] text-[#121212] text-[10px] font-black uppercase tracking-wider">
@@ -536,10 +547,10 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
 
                   <div className="flex items-center gap-2 text-[#121212] text-xs font-black">
                     <span className="flex items-center gap-1 bg-white neo-border-2 px-1.5 py-0.5 text-[10px]">
-                      ❤️ {card.reactions.love}
+                      <Heart className="w-3 h-3 text-[#E63946] fill-[#E63946]" /> {card.reactions.love}
                     </span>
                     <span className="flex items-center gap-1 bg-white neo-border-2 px-1.5 py-0.5 text-[10px]">
-                      🍎 {card.reactions.apple}
+                      <Apple className="w-3 h-3 text-red-500 fill-red-500" /> {card.reactions.apple}
                     </span>
                   </div>
                 </div>
@@ -577,7 +588,9 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                   <span className="text-[#121212] uppercase text-[11px]">
                     {shout.studentName} ({shout.gradeOrClass})
                   </span>
-                  <span className="bg-white neo-border-2 px-1.5 py-0.5 text-[10px]">❤️ {shout.likes}</span>
+                  <span className="bg-white neo-border-2 px-1.5 py-0.5 text-[10px] flex items-center gap-1">
+                    <Heart className="w-2.5 h-2.5 text-[#E63946] fill-[#E63946]" /> {shout.likes}
+                  </span>
                 </div>
               </div>
             ))}
@@ -596,12 +609,12 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
       <section className="bg-white neo-border neo-shadow p-6 md:p-8 text-[#121212]">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b-2 border-[#121212] mb-6">
           <div className="flex items-center gap-3">
-            <span className="w-10 h-10 neo-border-2 bg-[#E9C46A] flex items-center justify-center text-xl neo-shadow-sm">
-              🎁
+            <span className="w-10 h-10 neo-border-2 bg-[#E9C46A] flex items-center justify-center neo-shadow-sm">
+              <Gift className="w-5 h-5 text-[#121212]" />
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-black uppercase tracking-tight text-xl italic font-sans text-[#121212]">
+                <h3 className="font-black uppercase tracking-tight text-xl italic font-sans text-[#121212] heading-pop">
                   Student Gifts & Celebratory Tributes
                 </h3>
                 <span className="px-2 py-0.5 bg-[#E63946] text-white neo-border-2 text-[10px] font-black uppercase">
@@ -621,7 +634,7 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
               className="px-4 py-2.5 bg-[#121212] hover:bg-stone-900 text-white font-black uppercase text-xs tracking-wider neo-shadow transition-all cursor-pointer flex items-center gap-2 hover:translate-x-[1px] hover:translate-y-[1px]"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#E9C46A]" />
-              <span>Present a Gift 🎁</span>
+              <span>Present a Gift</span>
             </button>
           )}
         </div>
@@ -629,15 +642,15 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
         {teacherStudentGifts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {teacherStudentGifts.map((gift) => {
-              const animBadges: Record<string, { icon: string; name: string }> = {
-                fireworks: { icon: '🎆', name: 'Fireworks' },
-                balloons: { icon: '🎈', name: 'Balloons' },
-                origami: { icon: '🕊️', name: 'Origami' },
-                blossom: { icon: '🌸', name: 'Blossoms' },
-                trophy: { icon: '🏆', name: 'Trophy Fanfare' },
-                chalkboard: { icon: '✏️', name: 'Chalk Magic' },
+              const animBadges: Record<string, { icon: React.ReactNode; name: string }> = {
+                fireworks: { icon: <Sparkles className="w-3 h-3 text-amber-500" />, name: 'Fireworks' },
+                balloons: { icon: <PartyPopper className="w-3 h-3 text-rose-500" />, name: 'Balloons' },
+                origami: { icon: <Feather className="w-3 h-3 text-cyan-600" />, name: 'Origami' },
+                blossom: { icon: <Flower2 className="w-3 h-3 text-pink-500" />, name: 'Blossoms' },
+                trophy: { icon: <Trophy className="w-3 h-3 text-amber-600" />, name: 'Trophy Fanfare' },
+                chalkboard: { icon: <PenTool className="w-3 h-3 text-emerald-600" />, name: 'Chalk Magic' },
               };
-              const badge = animBadges[gift.animationType] || { icon: '✨', name: 'Celebration' };
+              const badge = animBadges[gift.animationType] || { icon: <Sparkles className="w-3 h-3 text-amber-500" />, name: 'Celebration' };
 
               return (
                 <div
@@ -647,8 +660,8 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <div className="flex items-center gap-2">
-                        <span className="w-10 h-10 neo-border-2 bg-white flex items-center justify-center text-2xl neo-shadow-sm">
-                          {gift.giftIcon}
+                        <span className="w-10 h-10 neo-border-2 bg-white flex items-center justify-center neo-shadow-sm">
+                          <Gift className="w-5 h-5 text-[#121212]" />
                         </span>
                         <div>
                           <h4 className="font-black uppercase tracking-tight text-xs text-[#121212]">
@@ -661,7 +674,7 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                       </div>
 
                       <span className="px-2 py-0.5 bg-white neo-border-2 text-[10px] font-black uppercase tracking-wider text-[#121212] flex items-center gap-1">
-                        <span>{badge.icon}</span>
+                        {badge.icon}
                         <span>{badge.name}</span>
                       </span>
                     </div>
@@ -699,19 +712,19 @@ export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           </div>
         ) : (
           <div className="text-center py-10 bg-[#F1FAEE] neo-border-2 p-6">
-            <span className="text-4xl block mb-2">🎁</span>
+            <Gift className="w-10 h-10 mx-auto text-[#121212] mb-2" />
             <h4 className="font-black uppercase tracking-tight text-sm text-[#121212] mb-1">
               No Student Gifts Presented Yet
             </h4>
             <p className="text-xs text-[#121212]/70 max-w-md mx-auto mb-4 font-medium">
-              Surprise {currentTeacher.name} with a personalized virtual gift like the Golden Apple or Cosmic Quill, complete with celebratory animations!
+              Surprise {currentTeacher.name} with a personalized virtual gift like the Golden Apple, Turing Neural Engine, or Cosmic Quill!
             </p>
             {onOpenSendGiftModal && (
               <button
                 onClick={() => onOpenSendGiftModal(currentTeacher.id)}
                 className="px-5 py-2 bg-[#E9C46A] hover:bg-yellow-300 text-[#121212] font-black uppercase text-xs neo-border-2 neo-shadow-sm transition-all cursor-pointer"
               >
-                Present First Gift to {currentTeacher.name} 🎁
+                Present First Gift to {currentTeacher.name}
               </button>
             )}
           </div>

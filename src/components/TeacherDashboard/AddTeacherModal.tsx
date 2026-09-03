@@ -67,7 +67,7 @@ export const AddTeacherModal: React.FC<AddTeacherModalProps> = ({
         badgeName: 'Exemplary Educator',
         revealQuote: `To ${name}, for guiding every student toward their brightest future!`,
         studentMessage: `Dear ${name}, thank you for your countless hours of preparation, endless patience, and steady encouragement. Happy Teachers’ Day!`,
-        virtualTrophy: '🏆',
+        virtualTrophy: 'Trophy',
         giftUnlocked: false,
       },
     };
@@ -87,7 +87,7 @@ export const AddTeacherModal: React.FC<AddTeacherModalProps> = ({
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-[#121212] bg-[#F1FAEE]">
           <div className="flex items-center gap-2">
             <UserPlus className="w-5 h-5 text-[#E63946]" />
-            <h3 className="font-sans font-black uppercase text-base tracking-tight text-[#121212]">
+            <h3 className="font-sans font-black uppercase text-base tracking-tight text-[#121212] heading-pop">
               Add Educator / Mentor Role
             </h3>
           </div>

@@ -13,6 +13,16 @@ import {
   Share2,
   Flame,
   Check,
+  PartyPopper,
+  Feather,
+  Flower2,
+  Trophy,
+  PenTool,
+  Mail,
+  MessageSquare,
+  Ribbon,
+  Star,
+  Medal,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CelebrationAnimationType, CelebrationRevealItem, GiftWrapStyle } from '../../types';
@@ -162,13 +172,13 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
     window.print();
   };
 
-  const animationOptions: { id: CelebrationAnimationType; name: string; icon: string; desc: string }[] = [
-    { id: 'fireworks', name: 'Fireworks', icon: '🎆', desc: 'Starry Rocket Bursts' },
-    { id: 'balloons', name: 'Balloons', icon: '🎈', desc: 'Sky Lanterns & Balloons' },
-    { id: 'origami', name: 'Origami', icon: '🕊️', desc: 'Flying Peace Cranes' },
-    { id: 'blossom', name: 'Blossoms', icon: '🌸', desc: 'Floral Petal Whirlwind' },
-    { id: 'trophy', name: 'Fanfare', icon: '🏆', desc: 'Confetti Cannons & Gold' },
-    { id: 'chalkboard', name: 'Chalk Magic', icon: '✏️', desc: 'Glowing Wisdom Sparks' },
+  const animationOptions: { id: CelebrationAnimationType; name: string; icon: React.ReactNode; desc: string }[] = [
+    { id: 'fireworks', name: 'Fireworks', icon: <Sparkles className="w-4 h-4 mx-auto text-amber-500" />, desc: 'Starry Rocket Bursts' },
+    { id: 'balloons', name: 'Balloons', icon: <PartyPopper className="w-4 h-4 mx-auto text-rose-500" />, desc: 'Sky Lanterns & Balloons' },
+    { id: 'origami', name: 'Origami', icon: <Feather className="w-4 h-4 mx-auto text-cyan-600" />, desc: 'Flying Peace Cranes' },
+    { id: 'blossom', name: 'Blossoms', icon: <Flower2 className="w-4 h-4 mx-auto text-pink-500" />, desc: 'Floral Petal Whirlwind' },
+    { id: 'trophy', name: 'Fanfare', icon: <Trophy className="w-4 h-4 mx-auto text-amber-600" />, desc: 'Confetti Cannons & Gold' },
+    { id: 'chalkboard', name: 'Chalk Magic', icon: <PenTool className="w-4 h-4 mx-auto text-emerald-600" />, desc: 'Glowing Wisdom Sparks' },
   ];
 
   const getWrapBoxDesign = (wrapStyle = 'crimson') => {
@@ -177,49 +187,49 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
         return {
           box: 'bg-[#E9C46A] border-[#121212]',
           ribbon: 'bg-[#E63946] border-[#121212]',
-          bow: '🎀',
+          bow: <Ribbon className="w-6 h-6 text-[#E63946]" />,
           tagBg: 'bg-white',
         };
       case 'emerald':
         return {
           box: 'bg-[#2A9D8F] text-white border-[#121212]',
           ribbon: 'bg-[#E9C46A] border-[#121212]',
-          bow: '🎁',
+          bow: <Gift className="w-6 h-6 text-[#E9C46A]" />,
           tagBg: 'bg-[#F1FAEE] text-[#121212]',
         };
       case 'bento':
         return {
           box: 'bg-[#F4A261] border-[#121212]',
           ribbon: 'bg-[#264653] border-[#121212]',
-          bow: '🧧',
+          bow: <Award className="w-6 h-6 text-[#264653]" />,
           tagBg: 'bg-white',
         };
       case 'midnight':
         return {
           box: 'bg-[#264653] text-white border-[#121212]',
           ribbon: 'bg-[#E9C46A] border-[#121212]',
-          bow: '✨',
+          bow: <Sparkles className="w-6 h-6 text-[#E9C46A]" />,
           tagBg: 'bg-[#E9C46A] text-[#121212]',
         };
       case 'teal':
         return {
           box: 'bg-[#A8DADC] text-[#121212] border-[#121212]',
           ribbon: 'bg-[#E63946] border-[#121212]',
-          bow: '🎀',
+          bow: <Ribbon className="w-6 h-6 text-[#E63946]" />,
           tagBg: 'bg-white text-[#121212]',
         };
       case 'ochre':
         return {
           box: 'bg-[#F4A261] text-[#121212] border-[#121212]',
           ribbon: 'bg-[#121212] text-white border-[#121212]',
-          bow: '⭐',
+          bow: <Star className="w-6 h-6 text-amber-500 fill-amber-500" />,
           tagBg: 'bg-white text-[#121212]',
         };
       case 'slate':
         return {
           box: 'bg-[#264653] text-white border-[#121212]',
           ribbon: 'bg-[#A8DADC] border-[#121212]',
-          bow: '🎖️',
+          bow: <Medal className="w-6 h-6 text-amber-400" />,
           tagBg: 'bg-[#E9C46A] text-[#121212]',
         };
       case 'crimson':
@@ -227,7 +237,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
         return {
           box: 'bg-[#E63946] text-white border-[#121212]',
           ribbon: 'bg-[#E9C46A] border-[#121212]',
-          bow: '🎀',
+          bow: <Ribbon className="w-6 h-6 text-amber-500" />,
           tagBg: 'bg-white text-[#121212]',
         };
     }
@@ -275,8 +285,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
   const resolvedIcon =
     item.icon ||
     d.giftIcon ||
-    (d.gift ? d.gift.virtualTrophy : undefined) ||
-    (activeType === 'gift' ? '🎁' : (activeType === 'card' ? '💌' : '💬'));
+    (d.gift ? d.gift.virtualTrophy : undefined);
   const resolvedBadgeName =
     item.badgeName ||
     (d.gift ? d.gift.badgeName : undefined) ||
@@ -291,7 +300,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
     item.date ||
     d.date ||
     d.timestamp ||
-    'National Teachers’ Day 2025';
+    'National Teachers’ Day 2026';
   const resolvedPhotoUrl =
     item.photoUrl ||
     d.photoUrl;
@@ -299,12 +308,12 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
   const wrapDesign = getWrapBoxDesign(resolvedWrapStyle);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/75 backdrop-blur-sm overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-        className="relative w-full max-w-2xl bg-[#FDFCFB] text-[#121212] neo-border neo-shadow-lg overflow-hidden my-4 sm:my-8"
+        className="relative w-full max-w-2xl bg-[#FDFCFB] text-[#121212] neo-border neo-shadow-lg overflow-hidden my-2 sm:my-8 max-h-[94vh] flex flex-col"
       >
         {/* Fullscreen Celebration Canvas (Active during revealed stage) */}
         {stage === 'revealed' && (
@@ -315,16 +324,22 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
         )}
 
         {/* Modal Top Ribbon Header */}
-        <div className="relative z-20 flex items-center justify-between px-5 py-3.5 border-b-[3px] border-[#121212] bg-[#F1FAEE]">
+        <div className="relative z-20 flex items-center justify-between px-4 sm:px-5 py-3 sm:py-3.5 border-b-[3px] border-[#121212] bg-[#F1FAEE] shrink-0">
           <div className="flex items-center gap-2">
-            <span className="neo-border-2 bg-[#E9C46A] p-1 text-sm">
-              {activeType === 'gift' ? '🎁' : activeType === 'card' ? '💌' : '💬'}
+            <span className="neo-border-2 bg-[#E9C46A] p-1.5 text-sm text-[#121212] flex items-center justify-center shrink-0">
+              {activeType === 'gift' ? (
+                <Gift className="w-4 h-4 text-[#121212]" />
+              ) : activeType === 'card' ? (
+                <Mail className="w-4 h-4 text-[#121212]" />
+              ) : (
+                <MessageSquare className="w-4 h-4 text-[#121212]" />
+              )}
             </span>
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-black uppercase tracking-tight text-[#121212] text-sm sm:text-base italic">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+              <span className="font-black uppercase tracking-tight text-[#121212] text-xs sm:text-base italic">
                 {activeType === 'gift' ? 'Surprise Gift Dedication' : activeType === 'card' ? 'Heartfelt Wish Reveal' : 'Classroom Shout-out'}
               </span>
-              <span className="px-2 py-0.5 neo-border-2 bg-[#A8DADC] text-[#121212] text-[10px] font-black uppercase tracking-wider">
+              <span className="px-2 py-0.5 neo-border-2 bg-[#A8DADC] text-[#121212] text-[9px] sm:text-[10px] font-black uppercase tracking-wider truncate max-w-[140px] sm:max-w-none">
                 To {resolvedRecipientName}
               </span>
             </div>
@@ -338,14 +353,14 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
               onClose();
             }}
             id="btn-close-celebration-modal"
-            className="p-1.5 text-[#121212] bg-white hover:bg-[#E63946] hover:text-white neo-border-2 transition-colors cursor-pointer"
+            className="p-1.5 text-[#121212] bg-white hover:bg-[#E63946] hover:text-white neo-border-2 transition-colors cursor-pointer shrink-0"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Modal Body Container */}
-        <div className="relative z-20 p-5 sm:p-8">
+        <div className="relative z-20 p-4 sm:p-8 overflow-y-auto">
           <AnimatePresence mode="wait">
             {/* STAGE 1: WRAPPED STATE */}
             {stage === 'wrapped' && (
@@ -385,7 +400,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
 
                       {/* Label Tag */}
                       <div className={`z-10 ${wrapDesign.tagBg} px-3 py-1.5 neo-border-2 text-[11px] font-black uppercase tracking-wider text-[#121212] flex items-center gap-1.5 neo-shadow-sm`}>
-                        <span>{resolvedIcon}</span>
+                        <Award className="w-3.5 h-3.5 text-[#E63946]" />
                         <span className="truncate max-w-[120px]">{resolvedTitle}</span>
                       </div>
                     </motion.div>
@@ -403,7 +418,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
                         AIR MAIL • DEDICATION
                       </div>
                       <div className="w-10 h-10 neo-border-2 bg-[#E63946] text-white flex items-center justify-center rounded-full text-base font-black shadow-inner mb-1">
-                        {resolvedIcon}
+                        <Mail className="w-5 h-5 text-white" />
                       </div>
                       <span className="font-black text-xs uppercase tracking-tight text-[#121212]">
                         For: {resolvedRecipientName}
@@ -415,7 +430,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
                   )}
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight italic text-[#121212] mb-1.5 font-sans">
+                <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight italic text-[#121212] mb-1.5 font-sans heading-pop">
                   {resolvedTitle}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#121212]/80 max-w-md mx-auto mb-6 font-medium leading-relaxed">
@@ -449,7 +464,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
                   transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
                   className="relative w-40 h-40 bg-[#F4A261] neo-border neo-shadow-lg flex items-center justify-center text-4xl"
                 >
-                  <span>✨</span>
+                  <Sparkles className="w-12 h-12 text-[#121212] animate-spin" />
                 </motion.div>
 
                 <motion.p
@@ -485,16 +500,16 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
                       initial={{ scale: 0, rotate: -20 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: 'spring', damping: 12 }}
-                      className="inline-flex items-center justify-center w-16 h-16 neo-border bg-[#E9C46A] text-[#121212] text-3xl neo-shadow-sm mb-2.5"
+                      className="inline-flex items-center justify-center w-16 h-16 neo-border bg-[#E9C46A] text-[#121212] neo-shadow-sm mb-2.5"
                     >
-                      {resolvedIcon}
+                      <Trophy className="w-8 h-8 text-[#121212]" />
                     </motion.div>
 
                     <div className="text-[10px] uppercase font-black tracking-widest text-[#E63946] mb-1">
                       {activeType === 'gift' ? '★ Official Student Dedication ★' : activeType === 'card' ? '★ Heartfelt Greeting Card ★' : '★ Student Shout-out Tribute ★'}
                     </div>
 
-                    <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight italic text-[#121212] font-sans">
+                    <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight italic text-[#121212] font-sans heading-pop">
                       {resolvedTitle}
                     </h2>
 
@@ -570,7 +585,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
                           }`}
                           title={opt.desc}
                         >
-                          <div className="text-base">{opt.icon}</div>
+                          <div className="py-1">{opt.icon}</div>
                           <div className="text-[9px] font-black uppercase tracking-tight mt-0.5 truncate">
                             {opt.name}
                           </div>
@@ -598,7 +613,7 @@ export const CelebrationRevealModal: React.FC<CelebrationRevealModalProps> = ({
                       id="btn-extra-sparkles"
                       className="flex items-center gap-1.5 px-3 py-2 bg-[#E9C46A] hover:bg-[#dfba5f] text-[#121212] text-xs font-black uppercase tracking-wider neo-border-2 neo-shadow-sm transition-all cursor-pointer active:translate-x-1 active:translate-y-1"
                     >
-                      <span>🎉</span>
+                      <Sparkles className="w-3.5 h-3.5 text-amber-700" />
                       <span>Blast Confetti {sparkleCount > 0 ? `(${sparkleCount})` : ''}</span>
                     </button>
                   </div>

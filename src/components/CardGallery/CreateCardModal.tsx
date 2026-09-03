@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { X, Sparkles, Heart, BookOpen, Palette } from 'lucide-react';
+import {
+  X,
+  Sparkles,
+  Heart,
+  BookOpen,
+  Palette,
+  Gift,
+  Feather,
+  Trophy,
+  Terminal,
+  Laptop,
+} from 'lucide-react';
 import { Teacher, GreetingCard, CelebrationAnimationType } from '../../types';
 import { playGiftRevealFanfare, playPopClick } from '../../utils/audio';
 
@@ -25,8 +36,8 @@ export const CreateCardModal: React.FC<CreateCardModalProps> = ({
   const [senderName, setSenderName] = useState('A Grateful Student');
   const [isAnonymous, setIsAnonymous] = useState(true);
   const [senderRole, setSenderRole] = useState('Grateful Pupil');
-  const [theme, setTheme] = useState<'golden' | 'chalkboard' | 'watercolor' | 'origami' | 'vintage'>('golden');
-  const [animationType, setAnimationType] = useState<CelebrationAnimationType>('fireworks');
+  const [theme, setTheme] = useState<'golden' | 'chalkboard' | 'watercolor' | 'origami' | 'vintage' | 'cyber'>('cyber');
+  const [animationType, setAnimationType] = useState<CelebrationAnimationType>('matrix');
   const [headline, setHeadline] = useState('To the Mentors Who Light Our Way');
   const [message, setMessage] = useState('');
   const [quote, setQuote] = useState('');
@@ -45,12 +56,13 @@ export const CreateCardModal: React.FC<CreateCardModalProps> = ({
       if (t) teacherName = t.name;
     }
 
-    const frontDesignMap = {
-      golden: '🌟 Golden Radiance of Knowledge',
-      chalkboard: '📚 Classic Blackboard & Apple',
-      watercolor: '🌸 Botanical Bloom of Gratitude',
-      origami: '⚡ Modern Folded Origami Crane',
-      vintage: '📜 Parchment of Timeless Wisdom',
+    const frontDesignMap: Record<string, string> = {
+      cyber: 'Terminal of Future Innovation & Code',
+      golden: 'Golden Radiance of Knowledge',
+      chalkboard: 'Classic Blackboard & Equations',
+      watercolor: 'Botanical Bloom of Gratitude',
+      origami: 'Modern Folded Origami Crane',
+      vintage: 'Parchment of Timeless Wisdom',
     };
 
     const newCard: GreetingCard = {
@@ -61,7 +73,7 @@ export const CreateCardModal: React.FC<CreateCardModalProps> = ({
       senderRole: senderRole.trim() || 'Student',
       theme,
       headline: headline.trim() || 'Happy Teachers’ Day!',
-      frontDesign: frontDesignMap[theme],
+      frontDesign: frontDesignMap[theme] || 'Universal Honor Tribute',
       message: message.trim(),
       favoriteQuote: quote.trim() || undefined,
       animationType,
@@ -74,6 +86,7 @@ export const CreateCardModal: React.FC<CreateCardModalProps> = ({
   };
 
   const themeOptions = [
+    { id: 'cyber', name: 'Cyber & Code', color: 'from-cyan-400 to-blue-600', border: 'border-cyan-400', defaultAnim: 'matrix' },
     { id: 'golden', name: 'Golden Foil', color: 'from-amber-400 to-yellow-600', border: 'border-amber-400', defaultAnim: 'trophy' },
     { id: 'chalkboard', name: 'Chalkboard', color: 'from-emerald-800 to-teal-950', border: 'border-emerald-500', defaultAnim: 'chalkboard' },
     { id: 'watercolor', name: 'Watercolor', color: 'from-rose-400 to-pink-600', border: 'border-rose-400', defaultAnim: 'blossom' },
@@ -81,40 +94,41 @@ export const CreateCardModal: React.FC<CreateCardModalProps> = ({
     { id: 'vintage', name: 'Vintage Parchment', color: 'from-stone-700 to-stone-900', border: 'border-amber-600', defaultAnim: 'balloons' },
   ];
 
-  const animationOptions: { id: CelebrationAnimationType; name: string; icon: string; desc: string }[] = [
-    { id: 'fireworks', name: 'Fireworks', icon: '🎆', desc: 'Starry Rocket Bursts' },
-    { id: 'balloons', name: 'Balloons', icon: '🎈', desc: 'Floating Lanterns & Balloons' },
-    { id: 'origami', name: 'Origami Cranes', icon: '🕊️', desc: 'Peace Cranes in Flight' },
-    { id: 'blossom', name: 'Floral Petals', icon: '🌸', desc: 'Swirling Blossom Breeze' },
-    { id: 'trophy', name: 'Trophy Fanfare', icon: '🏆', desc: 'Confetti Cannons Blast' },
-    { id: 'chalkboard', name: 'Chalk Sparks', icon: '✏️', desc: 'Wisdom Equations & Stars' },
+  const animationOptions: { id: CelebrationAnimationType; name: string; icon: React.ReactNode; desc: string }[] = [
+    { id: 'matrix', name: 'Code Stream', icon: <Terminal className="w-4 h-4 text-cyan-600" />, desc: 'Binary Matrix Rain & Sparks' },
+    { id: 'fireworks', name: 'Fireworks', icon: <Sparkles className="w-4 h-4 text-amber-500" />, desc: 'Starry Rocket Bursts' },
+    { id: 'balloons', name: 'Balloons', icon: <Gift className="w-4 h-4 text-rose-500" />, desc: 'Floating Lanterns & Gifts' },
+    { id: 'origami', name: 'Origami Cranes', icon: <Feather className="w-4 h-4 text-sky-500" />, desc: 'Peace Cranes in Flight' },
+    { id: 'blossom', name: 'Floral Petals', icon: <Heart className="w-4 h-4 text-pink-500" />, desc: 'Swirling Petal Breeze' },
+    { id: 'trophy', name: 'Trophy Fanfare', icon: <Trophy className="w-4 h-4 text-amber-500" />, desc: 'Golden Cannons Blast' },
+    { id: 'chalkboard', name: 'Chalk Sparks', icon: <BookOpen className="w-4 h-4 text-emerald-600" />, desc: 'Wisdom Equations & Stars' },
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/75 backdrop-blur-sm overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full max-w-xl bg-white neo-border neo-shadow-lg text-[#121212] overflow-hidden my-8"
+        className="w-full max-w-xl bg-white neo-border neo-shadow-lg text-[#121212] overflow-hidden my-2 sm:my-8 max-h-[94vh] flex flex-col"
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b-2 border-[#121212] bg-[#F1FAEE]">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b-2 border-[#121212] bg-[#F1FAEE] shrink-0">
           <div className="flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-[#E63946]" />
-            <h3 className="font-black uppercase tracking-tight italic font-sans text-lg text-[#121212]">
+            <h3 className="font-black uppercase tracking-tight italic font-sans text-base sm:text-lg text-[#121212] heading-pop">
               Craft a Teachers’ Day Greeting Card
             </h3>
           </div>
           <button
             onClick={onClose}
             id="btn-close-create-card-modal"
-            className="p-1 bg-white neo-border-2 text-[#121212] hover:bg-[#E63946] hover:text-white transition-colors cursor-pointer"
+            className="p-1.5 bg-white neo-border-2 text-[#121212] hover:bg-[#E63946] hover:text-white transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 overflow-y-auto">
           <div>
             <label className="block text-xs font-black uppercase text-[#121212] tracking-wider mb-1">
               Select Recipient Educator *
@@ -124,7 +138,7 @@ export const CreateCardModal: React.FC<CreateCardModalProps> = ({
               onChange={(e) => setSelectedTeacherId(e.target.value)}
               className="w-full px-3.5 py-2 neo-border-2 bg-[#F1FAEE] text-xs font-bold text-[#121212] focus:bg-white focus:outline-none"
             >
-              <option value="all">🌟 All Teachers & Faculty (General Card)</option>
+              <option value="all">All Teachers & Faculty (General Tribute)</option>
               {teachers.map((t) => (
                 <option key={t.id} value={t.id}>
                   {t.name} ({t.department})
@@ -164,7 +178,7 @@ export const CreateCardModal: React.FC<CreateCardModalProps> = ({
           <div className="bg-[#F1FAEE] neo-border-2 p-3.5 neo-shadow-sm">
             <div className="flex items-center justify-between mb-2">
               <label className="block text-xs font-black uppercase text-[#121212] tracking-wider">
-                🌟 Choose Celebratory Reveal Animation *
+                Choose Celebratory Reveal Animation *
               </label>
               <span className="text-[10px] font-black uppercase text-[#E63946]">
                 Plays Live Upon Reveal!
@@ -187,7 +201,7 @@ export const CreateCardModal: React.FC<CreateCardModalProps> = ({
                   }`}
                 >
                   <div className="flex items-center gap-1.5">
-                    <span className="text-base">{a.icon}</span>
+                    <span>{a.icon}</span>
                     <span className="text-xs font-black uppercase tracking-tight">{a.name}</span>
                   </div>
                   <span className="text-[9px] text-[#121212]/70 block mt-0.5 font-medium">

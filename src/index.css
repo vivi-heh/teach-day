@@ -26,14 +26,12 @@
     box-shadow: 5px 5px 0px 0px #264653;
   }
   .grid-paper {
-    background-image: radial-gradient(#121212 1.2px, transparent 1.2px);
+    background-image: radial-gradient(rgba(18, 18, 18, 0.12) 1.2px, transparent 1.2px);
     background-size: 20px 20px;
-    background-color: rgba(18, 18, 18, 0.02);
   }
   .grid-paper-dark {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.2px, transparent 1.2px);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1.2px, transparent 1.2px);
     background-size: 20px 20px;
-    background-color: rgba(18, 18, 18, 0.6);
   }
   .perspective-1000 {
     perspective: 1000px;
@@ -54,5 +52,23 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  .heading-pop {
+    text-shadow: 2px 2px 0px #121212;
+  }
+  .heading-pop-light {
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.35);
+  }
+  .heading-pop-amber {
+    text-shadow: 2px 2px 0px #121212, 4px 4px 0px #E9C46A;
+  }
+  .heading-pop-crimson {
+    text-shadow: 2px 2px 0px #121212, 4px 4px 0px #E63946;
+  }
+  .heading-pop-white {
+    text-shadow: 2px 2px 0px #121212, 4px 4px 0px #264653;
+  }
+  .cyber-glow {
+    box-shadow: 0 0 15px rgba(42, 157, 143, 0.4), 4px 4px 0px #121212;
   }
 }

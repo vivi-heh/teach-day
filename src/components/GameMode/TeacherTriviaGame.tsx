@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Award, CheckCircle2, XCircle, RotateCcw, Sparkles, HelpCircle, ArrowRight } from 'lucide-react';
+import {
+  Award,
+  CheckCircle2,
+  XCircle,
+  RotateCcw,
+  Sparkles,
+  HelpCircle,
+  ArrowRight,
+  Flame,
+  Lightbulb,
+  Trophy,
+  BookOpen,
+} from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { TRIVIA_QUESTIONS } from '../../data/mockData';
 import { playPopClick, playGiftRevealFanfare, playApplause } from '../../utils/audio';
@@ -55,11 +67,11 @@ export const TeacherTriviaGame: React.FC = () => {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#E63946] text-white text-[10px] font-black uppercase tracking-wider neo-border-2 mb-2 neo-shadow-sm">
           <span>Wisdom & History Quiz</span>
         </div>
-        <h3 className="text-2xl font-black uppercase tracking-tight italic text-[#121212] font-sans">
+        <h3 className="text-2xl font-black uppercase tracking-tight italic text-[#121212] font-sans heading-pop">
           Educators’ Hall of Fame Trivia
         </h3>
         <p className="text-xs text-[#121212]/75 mt-1 font-bold uppercase tracking-wider">
-          Test your knowledge of legendary mentors, history of Teachers’ Day, and inspiring pedagogical facts!
+          Test your knowledge of legendary mentors, computing pioneers, Teachers’ Day history, and inspiring pedagogical facts!
         </p>
       </div>
 
@@ -71,8 +83,9 @@ export const TeacherTriviaGame: React.FC = () => {
               Question {currentIdx + 1} of {TRIVIA_QUESTIONS.length}
             </span>
             <div className="flex items-center gap-4">
-              <span className="text-[#E63946] font-black uppercase">
-                Streak: {streak} 🔥
+              <span className="text-[#E63946] font-black uppercase flex items-center gap-1">
+                <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                <span>Streak: {streak}</span>
               </span>
               <span className="text-[#264653] font-black uppercase">
                 Score: {score} / {TRIVIA_QUESTIONS.length}
@@ -146,8 +159,9 @@ export const TeacherTriviaGame: React.FC = () => {
               <p className="text-[#121212] leading-relaxed font-medium">
                 {currentQ.funFact}
               </p>
-              <p className="text-[#121212] italic font-bold pt-1 border-t-2 border-[#121212]">
-                💡 Lesson: {currentQ.teacherWisdom}
+              <p className="text-[#121212] italic font-bold pt-1 border-t-2 border-[#121212] flex items-center gap-1.5">
+                <Lightbulb className="w-3.5 h-3.5 text-amber-700 fill-amber-500 shrink-0" />
+                <span>Lesson: {currentQ.teacherWisdom}</span>
               </p>
 
               <div className="pt-2 flex justify-end">
@@ -170,15 +184,15 @@ export const TeacherTriviaGame: React.FC = () => {
           animate={{ opacity: 1, scale: 1 }}
           className="text-center py-6 space-y-6"
         >
-          <div className="w-20 h-20 neo-border bg-[#E9C46A] text-[#121212] mx-auto flex items-center justify-center text-4xl neo-shadow">
-            🏆
+          <div className="w-20 h-20 neo-border bg-[#E9C46A] text-[#121212] mx-auto flex items-center justify-center neo-shadow">
+            <Trophy className="w-10 h-10 text-[#121212]" />
           </div>
 
           <div>
             <span className="text-xs uppercase font-black tracking-widest text-[#E63946]">
               Quiz Completed!
             </span>
-            <h4 className="text-2xl font-black uppercase tracking-tight italic font-sans text-[#121212] mt-1">
+            <h4 className="text-2xl font-black uppercase tracking-tight italic font-sans text-[#121212] mt-1 heading-pop">
               You scored {score} / {TRIVIA_QUESTIONS.length}
             </h4>
             <p className="text-xs text-[#121212]/80 max-w-sm mx-auto mt-2 font-medium">

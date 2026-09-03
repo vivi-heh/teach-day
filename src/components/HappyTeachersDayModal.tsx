@@ -11,6 +11,10 @@ import {
   MessageSquareHeart,
   Gamepad2,
   Home,
+  GraduationCap,
+  Lightbulb,
+  Award,
+  Apple,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playGiftRevealFanfare, playSparkleChime, playPopClick } from '../utils/audio';
@@ -127,12 +131,12 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.85, y: -20 }}
           transition={{ type: 'spring', damping: 24, stiffness: 280 }}
-          className="relative w-full max-w-2xl bg-[#FDFCFB] neo-border neo-shadow-lg text-[#121212] overflow-hidden my-auto select-none"
+          className="relative w-full max-w-2xl bg-[#FDFCFB] neo-border neo-shadow-lg text-[#121212] my-4 sm:my-auto select-none max-h-[92vh] flex flex-col overflow-hidden"
         >
           {/* Top celebratory ribbon bar */}
-          <div className="bg-[#E63946] text-white px-4 py-2 flex items-center justify-between border-b-2 border-[#121212]">
+          <div className="bg-[#E63946] text-white px-4 py-2 flex items-center justify-between border-b-2 border-[#121212] shrink-0">
             <div className="flex items-center gap-2">
-              <span className="text-base animate-bounce">🍎</span>
+              <Apple className="w-4 h-4 fill-white" />
               <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest">
                 ★ TEACHERS’ DAY 2026 TRIBUTE ★
               </span>
@@ -149,7 +153,7 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
           </div>
 
           {/* Festive Background Pattern */}
-          <div className="p-6 sm:p-8 space-y-6 relative grid-paper">
+          <div className="p-4 sm:p-8 space-y-5 sm:space-y-6 relative grid-paper overflow-y-auto">
             {/* Pop-out Mascot & Floating Badge */}
             <div className="flex flex-col items-center text-center space-y-3">
               <motion.div
@@ -162,9 +166,9 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="w-20 h-20 sm:w-24 sm:h-24 bg-[#E9C46A] neo-border neo-shadow flex items-center justify-center text-4xl sm:text-5xl"
+                className="w-20 h-20 sm:w-24 sm:h-24 bg-[#E9C46A] neo-border neo-shadow flex items-center justify-center"
               >
-                🎓
+                <GraduationCap className="w-12 h-12 text-[#121212]" />
               </motion.div>
 
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#A8DADC] neo-border-2 text-[#121212] text-xs font-black uppercase tracking-wider neo-shadow-sm">
@@ -173,7 +177,7 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
               </div>
 
               {/* Grand Joyous Headline */}
-              <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight italic font-sans text-[#121212] leading-none">
+              <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight italic font-sans text-[#121212] leading-none heading-pop">
                 HAPPY <span className="text-[#E63946]">TEACHERS’</span> DAY 2026!
               </h1>
 
@@ -182,7 +186,7 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
               </p>
             </div>
 
-            {/* Deep Heartfelt Tribute Text - 100% visible, dark text, clean contrast */}
+            {/* Deep Heartfelt Tribute Text */}
             <div className="bg-[#F1FAEE] neo-border-2 p-5 sm:p-6 neo-shadow-sm space-y-3">
               <p className="text-sm sm:text-base text-[#121212] leading-relaxed font-sans font-normal text-center">
                 “Teaching is the singular profession that creates all other professions. Behind every dream we dare to pursue, every doubt we overcome, and every quiet milestone we reach stands an educator whose patience never wavered, whose encouragement carried us forward, and whose belief opened doors we never knew existed.”
@@ -195,8 +199,8 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
 
             {/* 3 Pillar Tribute Badges */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="bg-white neo-border-2 p-3 text-center neo-shadow-sm">
-                <span className="text-2xl block mb-1">🌟</span>
+              <div className="bg-white neo-border-2 p-3 text-center neo-shadow-sm flex flex-col items-center">
+                <Lightbulb className="w-6 h-6 text-amber-500 fill-amber-500 mb-1.5" />
                 <h4 className="text-xs font-black uppercase tracking-wider text-[#121212]">
                   Curiosity Ignited
                 </h4>
@@ -205,8 +209,8 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
                 </p>
               </div>
 
-              <div className="bg-white neo-border-2 p-3 text-center neo-shadow-sm">
-                <span className="text-2xl block mb-1">❤️</span>
+              <div className="bg-white neo-border-2 p-3 text-center neo-shadow-sm flex flex-col items-center">
+                <Heart className="w-6 h-6 text-rose-500 fill-rose-500 mb-1.5" />
                 <h4 className="text-xs font-black uppercase tracking-wider text-[#121212]">
                   Infinite Patience
                 </h4>
@@ -215,8 +219,8 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
                 </p>
               </div>
 
-              <div className="bg-white neo-border-2 p-3 text-center neo-shadow-sm">
-                <span className="text-2xl block mb-1">🚀</span>
+              <div className="bg-white neo-border-2 p-3 text-center neo-shadow-sm flex flex-col items-center">
+                <Award className="w-6 h-6 text-cyan-700 mb-1.5" />
                 <h4 className="text-xs font-black uppercase tracking-wider text-[#121212]">
                   Faith in Potential
                 </h4>
@@ -233,7 +237,8 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
                 id="btn-enter-portal-primary"
                 className="w-full py-3.5 bg-[#E63946] hover:bg-[#d62839] text-white font-black uppercase text-sm sm:text-base tracking-wider neo-border neo-shadow hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-3 cursor-pointer"
               >
-                <span>🎉 View Universal Tribute & Wishes</span>
+                <Sparkles className="w-5 h-5 text-amber-300" />
+                <span>View Universal Tribute & Wishes</span>
                 <ArrowRight className="w-5 h-5" />
               </button>
 
@@ -245,7 +250,7 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
                   className="px-4 py-2 bg-[#E9C46A] hover:bg-yellow-300 text-[#121212] neo-border-2 text-xs font-black uppercase tracking-wider neo-shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#E63946]" />
-                  <span>Shower Confetti 🎊</span>
+                  <span>Shower Confetti</span>
                 </button>
 
                 <button
@@ -266,7 +271,7 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
                   ) : (
                     <>
                       <Volume2 className="w-3.5 h-3.5 text-[#E63946]" />
-                      <span>Listen to Dedication 🔊</span>
+                      <span>Listen to Dedication</span>
                     </>
                   )}
                 </button>
@@ -283,25 +288,29 @@ export const HappyTeachersDayModal: React.FC<HappyTeachersDayModalProps> = ({
                   onClick={() => handleJumpTo('dashboard')}
                   className="px-3 py-1.5 bg-[#FFF3B0] hover:bg-yellow-200 neo-border-2 text-[#121212] transition-colors cursor-pointer flex items-center gap-1"
                 >
-                  <Home className="w-3.5 h-3.5" /> 🌟 Tribute Home
+                  <Home className="w-3.5 h-3.5" />
+                  <span>Tribute Home</span>
                 </button>
                 <button
                   onClick={() => handleJumpTo('cards')}
                   className="px-3 py-1.5 bg-[#A8DADC] hover:bg-teal-200 neo-border-2 text-[#121212] transition-colors cursor-pointer flex items-center gap-1"
                 >
-                  <BookOpen className="w-3.5 h-3.5" /> 💌 Wishes & Cards
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>Wishes & Cards</span>
                 </button>
                 <button
                   onClick={() => handleJumpTo('memories')}
                   className="px-3 py-1.5 bg-[#FFD166] hover:bg-amber-300 neo-border-2 text-[#121212] transition-colors cursor-pointer flex items-center gap-1"
                 >
-                  <MessageSquareHeart className="w-3.5 h-3.5" /> 💬 Gratitude Notes
+                  <MessageSquareHeart className="w-3.5 h-3.5" />
+                  <span>Gratitude Notes</span>
                 </button>
                 <button
                   onClick={() => handleJumpTo('games')}
                   className="px-3 py-1.5 bg-[#F4A261] hover:bg-orange-300 neo-border-2 text-[#121212] transition-colors cursor-pointer flex items-center gap-1"
                 >
-                  <Gamepad2 className="w-3.5 h-3.5" /> 🎮 Trivia & Games
+                  <Gamepad2 className="w-3.5 h-3.5" />
+                  <span>Trivia & Games</span>
                 </button>
               </div>
             </div>

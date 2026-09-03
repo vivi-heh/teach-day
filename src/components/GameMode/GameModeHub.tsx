@@ -12,21 +12,21 @@ export const GameModeHub: React.FC = () => {
     {
       id: 'tictactoe' as const,
       name: 'Chalkboard Tic-Tac-Toe',
-      desc: 'Play with Apples 🍎 vs Stars ⭐ against AI or friends',
+      desc: 'Play with Golden Apples, Stars, and Code Bits against AI or friends',
       icon: Grid3X3,
       badge: 'Chalkboard Classic',
     },
     {
       id: 'trivia' as const,
       name: 'Educator Trivia & Wisdom',
-      desc: 'Test your knowledge on legendary teachers & history',
+      desc: 'Test your knowledge on legendary teachers, computing & history',
       icon: HelpCircle,
       badge: 'Brain Challenge',
     },
     {
       id: 'catch' as const,
       name: 'Catch the Wisdom Apples',
-      desc: 'Catch falling apples & books in your backpack',
+      desc: 'Catch falling apples, books & microchips in your school satchel',
       icon: Apple,
       badge: 'Action Arcade',
     },
@@ -40,11 +40,11 @@ export const GameModeHub: React.FC = () => {
           <Gamepad2 className="w-3.5 h-3.5 text-white" />
           <span>Teachers’ Day Mini-Games Hub</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight italic font-sans text-white">
+        <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-tight italic font-sans text-white heading-pop-white">
           Playful Classroom Mini-Games
         </h2>
         <p className="text-xs sm:text-sm text-stone-200 mt-2 font-medium max-w-xl mx-auto">
-          Celebrate Teachers’ Day with cheerful learning games, chalkboard competitions, and wisdom puzzles.
+          Celebrate Teachers’ Day with cheerful learning games, chalkboard competitions, computing puzzles, and wisdom challenges.
         </p>
       </section>
 

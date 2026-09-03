@@ -236,7 +236,7 @@ export const CelebrationCanvas: React.FC<CelebrationCanvasProps> = ({
         });
       }
     } else if (animationType === 'chalkboard') {
-      const symbols = ['⭐', '🍎', '∞', '📖', '✨', 'π', '✏️', '🏆', '+', '∫'];
+      const symbols = ['{ }', '</>', '01', '∞', 'π', 'λ', '∑', '∫', 'f(x)', '√', 'Ω', '&&'];
       const chalkColors = ['#E9C46A', '#E63946', '#A8DADC', '#F4A261', '#FFFFFF', '#FDFCFB'];
       for (let i = 0; i < 40; i++) {
         const angle = Math.random() * Math.PI * 2;
@@ -602,7 +602,7 @@ export const CelebrationCanvas: React.FC<CelebrationCanvasProps> = ({
       else if (animationType === 'chalkboard') {
         // Continuous spawn from center
         if (frame % 8 === 0 && Math.random() > 0.3) {
-          const symbols = ['⭐', '🍎', '∞', '📖', '✨', 'π', '✏️', '🏆', '+', '∫'];
+          const symbols = ['{ }', '</>', '01', '∞', 'π', 'λ', '∑', '∫', 'f(x)', '√', 'Ω', '&&'];
           const chalkColors = ['#E9C46A', '#E63946', '#A8DADC', '#F4A261', '#FFFFFF', '#FDFCFB'];
           const angle = Math.random() * Math.PI * 2;
           const speed = Math.random() * 3.5 + 1.5;

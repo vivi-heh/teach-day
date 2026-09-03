@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { Heart, PlusCircle, Sparkles, Filter, Search, MessageSquareHeart, Quote } from 'lucide-react';
+import {
+  Heart,
+  PlusCircle,
+  Sparkles,
+  Filter,
+  Search,
+  MessageSquareHeart,
+  Quote,
+  BookOpen,
+  Smile,
+  GraduationCap,
+} from 'lucide-react';
 import { Shoutout, Teacher } from '../../types';
 import { playPopClick } from '../../utils/audio';
 
@@ -53,7 +64,7 @@ export const MemoriesWall: React.FC<MemoriesWallProps> = ({
             <MessageSquareHeart className="w-3.5 h-3.5 text-white" />
             <span>Teachers’ Day 2026 Gratitude Wall</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight italic font-sans text-white leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight italic font-sans text-white leading-tight heading-pop-white">
             Notes of Gratitude from Grateful Hearts
           </h1>
           <p className="text-sm sm:text-base text-stone-100 leading-relaxed font-medium">
@@ -88,43 +99,47 @@ export const MemoriesWall: React.FC<MemoriesWallProps> = ({
           </button>
           <button
             onClick={() => setSelectedTagFilter('Heartfelt')}
-            className={`px-3 py-1.5 neo-border-2 font-black uppercase whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-3 py-1.5 neo-border-2 font-black uppercase whitespace-nowrap flex items-center gap-1.5 transition-all cursor-pointer ${
               selectedTagFilter === 'Heartfelt'
                 ? 'bg-[#E9C46A] text-[#121212] neo-shadow-sm'
                 : 'bg-[#F1FAEE] text-[#121212] hover:bg-white'
             }`}
           >
-            ❤️ Heartfelt
+            <Heart className="w-3.5 h-3.5 text-[#E63946] fill-[#E63946]" />
+            <span>Heartfelt</span>
           </button>
           <button
             onClick={() => setSelectedTagFilter('Inspirational')}
-            className={`px-3 py-1.5 neo-border-2 font-black uppercase whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-3 py-1.5 neo-border-2 font-black uppercase whitespace-nowrap flex items-center gap-1.5 transition-all cursor-pointer ${
               selectedTagFilter === 'Inspirational'
                 ? 'bg-[#E9C46A] text-[#121212] neo-shadow-sm'
                 : 'bg-[#F1FAEE] text-[#121212] hover:bg-white'
             }`}
           >
-            🌟 Inspirational
+            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <span>Inspirational</span>
           </button>
           <button
             onClick={() => setSelectedTagFilter('Life Lesson')}
-            className={`px-3 py-1.5 neo-border-2 font-black uppercase whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-3 py-1.5 neo-border-2 font-black uppercase whitespace-nowrap flex items-center gap-1.5 transition-all cursor-pointer ${
               selectedTagFilter === 'Life Lesson'
                 ? 'bg-[#E9C46A] text-[#121212] neo-shadow-sm'
                 : 'bg-[#F1FAEE] text-[#121212] hover:bg-white'
             }`}
           >
-            🌱 Life Lesson
+            <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Life Lesson</span>
           </button>
           <button
             onClick={() => setSelectedTagFilter('Funny')}
-            className={`px-3 py-1.5 neo-border-2 font-black uppercase whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-3 py-1.5 neo-border-2 font-black uppercase whitespace-nowrap flex items-center gap-1.5 transition-all cursor-pointer ${
               selectedTagFilter === 'Funny'
                 ? 'bg-[#E9C46A] text-[#121212] neo-shadow-sm'
                 : 'bg-[#F1FAEE] text-[#121212] hover:bg-white'
             }`}
           >
-            😄 Humorous
+            <Smile className="w-3.5 h-3.5 text-amber-600" />
+            <span>Humorous</span>
           </button>
         </div>
 

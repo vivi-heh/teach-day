@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Sparkles, Award, Gift, Heart, Printer, Volume2, CheckCircle2, RotateCcw } from 'lucide-react';
+import { X, Sparkles, Award, Gift, Heart, Printer, Volume2, CheckCircle2, RotateCcw, Trophy, Ribbon } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Teacher } from '../../types';
 import { playGiftRevealFanfare, playSparkleChime, playPopClick } from '../../utils/audio';
@@ -109,7 +109,9 @@ export const GiftSurpriseModal: React.FC<GiftSurpriseModalProps> = ({
         {/* Header with close button */}
         <div className="flex items-center justify-between px-6 py-4 border-b-[3px] border-[#121212] bg-[#F1FAEE]">
           <div className="flex items-center gap-2">
-            <span className="neo-border-2 bg-[#E9C46A] p-1 text-sm">🎁</span>
+            <span className="neo-border-2 bg-[#E9C46A] p-1.5 flex items-center justify-center">
+              <Gift className="w-4 h-4 text-[#121212]" />
+            </span>
             <span className="font-black uppercase tracking-tight text-[#121212] text-base italic">
               Surprise Tribute Box // {teacher.name}
             </span>
@@ -163,7 +165,7 @@ export const GiftSurpriseModal: React.FC<GiftSurpriseModalProps> = ({
                       transition={{ duration: 1.8, repeat: Infinity }}
                       className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-[#E9C46A] neo-border flex items-center justify-center text-[#121212] font-black text-2xl neo-shadow-sm"
                     >
-                      🎀
+                      <Ribbon className="w-7 h-7 text-[#121212]" />
                     </motion.div>
 
                     {/* Shimmer sparkle badge */}
@@ -174,7 +176,7 @@ export const GiftSurpriseModal: React.FC<GiftSurpriseModalProps> = ({
                   </motion.div>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight italic text-[#121212] mb-2 font-sans">
+                <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight italic text-[#121212] mb-2 font-sans heading-pop">
                   A Special Dedication Box for {teacher.name}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#121212]/80 max-w-md mx-auto mb-6 font-medium leading-relaxed">
@@ -207,7 +209,7 @@ export const GiftSurpriseModal: React.FC<GiftSurpriseModalProps> = ({
                   transition={{ duration: 1.3, repeat: Infinity, ease: 'easeInOut' }}
                   className="relative w-44 h-44 bg-[#F4A261] neo-border neo-shadow-lg flex items-center justify-center"
                 >
-                  <span className="text-5xl animate-bounce">✨</span>
+                  <Sparkles className="w-12 h-12 text-[#121212] animate-spin" />
                 </motion.div>
 
                 <motion.p
@@ -238,13 +240,13 @@ export const GiftSurpriseModal: React.FC<GiftSurpriseModalProps> = ({
 
                   {/* Header Crest */}
                   <div className="text-center mb-6">
-                    <div className="inline-flex items-center justify-center w-16 h-16 neo-border bg-[#E9C46A] text-[#121212] text-3xl neo-shadow-sm mb-3">
-                      {teacher.gift.virtualTrophy || '🏆'}
+                    <div className="inline-flex items-center justify-center w-16 h-16 neo-border bg-[#E9C46A] text-[#121212] neo-shadow-sm mb-3">
+                      <Trophy className="w-8 h-8 text-[#121212]" />
                     </div>
                     <div className="text-[10px] uppercase font-black tracking-widest text-[#E63946] mb-1">
                       Certificate of Everlasting Inspiration
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight italic text-[#121212]">
+                    <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight italic text-[#121212] heading-pop">
                       {teacher.gift.giftTitle}
                     </h2>
                     <p className="text-xs text-[#121212]/70 font-bold uppercase tracking-wider mt-1">Conferred on National & World Teachers’ Day</p>

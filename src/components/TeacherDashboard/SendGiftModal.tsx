@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { X, Gift, Sparkles, Award, Heart } from 'lucide-react';
+import {
+  X,
+  Gift,
+  Sparkles,
+  Award,
+  Heart,
+  Apple,
+  BookOpen,
+  Coffee,
+  Flower2,
+  Compass,
+  Palette,
+  Trophy,
+  Feather,
+  PartyPopper,
+  PenTool,
+  Laptop,
+  AlertCircle,
+} from 'lucide-react';
 import { Teacher, StudentGift, CelebrationAnimationType } from '../../types';
 import { playPopClick, playSparkleChime } from '../../utils/audio';
 
@@ -16,50 +34,58 @@ export const VIRTUAL_GIFTS = [
   {
     id: 'golden-apple',
     name: 'Golden Apple of Knowledge',
-    icon: '🍎',
+    iconName: 'Apple',
+    renderIcon: () => <Apple className="w-6 h-6 text-red-500 fill-red-500 mb-1" />,
     desc: 'Symbolizing nourishing wisdom, patience, and eternal classroom gratitude.',
   },
   {
     id: 'cosmic-quill',
     name: 'Cosmic Library Quill & Ink',
-    icon: '📚',
+    iconName: 'BookOpen',
+    renderIcon: () => <BookOpen className="w-6 h-6 text-blue-600 mb-1" />,
     desc: 'For inspiring deep thought, eloquent words, and timeless life lessons.',
+  },
+  {
+    id: 'computer-science-turing',
+    name: 'Turing Neural Engine & Laptop',
+    iconName: 'Laptop',
+    renderIcon: () => <Laptop className="w-6 h-6 text-emerald-600 mb-1" />,
+    desc: 'Honoring computer science mastery, algorithmic thinking, and digital innovation.',
   },
   {
     id: 'coffee-hamper',
     name: 'Master Educator Coffee & Cocoa Hamper',
-    icon: '☕',
+    iconName: 'Coffee',
+    renderIcon: () => <Coffee className="w-6 h-6 text-amber-700 mb-1" />,
     desc: 'Warm comforting brew for early lesson plans and dedicated grading nights.',
   },
   {
     id: 'gratitude-bouquet',
     name: 'Bouquet of Sunflowers & Gratitude',
-    icon: '💐',
+    iconName: 'Flower2',
+    renderIcon: () => <Flower2 className="w-6 h-6 text-pink-500 mb-1" />,
     desc: 'A radiant burst of fresh blooms to brighten every step of your mentoring journey.',
   },
   {
     id: 'explorer-compass',
     name: 'Grand Explorer Compass & Astrolabe',
-    icon: '🔬',
+    iconName: 'Compass',
+    renderIcon: () => <Compass className="w-6 h-6 text-indigo-600 mb-1" />,
     desc: 'For navigating uncharted ideas and guiding young minds to their true north.',
   },
   {
     id: 'artisan-palette',
     name: 'Master Artisan Palette & Golden Brush',
-    icon: '🎨',
+    iconName: 'Palette',
+    renderIcon: () => <Palette className="w-6 h-6 text-purple-600 mb-1" />,
     desc: 'Honoring the creative spark and colorful imagination you bring to school.',
   },
   {
     id: 'star-trophy',
     name: 'Order of the Guiding Star Trophy',
-    icon: '🏆',
+    iconName: 'Trophy',
+    renderIcon: () => <Trophy className="w-6 h-6 text-amber-500 fill-amber-500 mb-1" />,
     desc: 'The highest honorary tribute bestowed by students for lifetime inspiration.',
-  },
-  {
-    id: 'origami-cranes',
-    name: '1,000 Origami Cranes of Peace & Joy',
-    icon: '🕊️',
-    desc: 'A thousand folded paper cranes carrying student wishes for health and happiness.',
   },
 ];
 
@@ -95,13 +121,13 @@ export const SendGiftModal: React.FC<SendGiftModalProps> = ({
     { id: 'midnight', name: 'Starlight Slate', color: 'bg-[#264653]', border: 'border-[#121212]' },
   ];
 
-  const animationOptions: { id: CelebrationAnimationType; name: string; icon: string; desc: string }[] = [
-    { id: 'fireworks', name: 'Fireworks Burst', icon: '🎆', desc: 'Starry Rocket Flashes' },
-    { id: 'balloons', name: 'Sky Balloons & Lanterns', icon: '🎈', desc: 'Buoyant Floating Joy' },
-    { id: 'origami', name: 'Peace Cranes Soar', icon: '🕊️', desc: 'Graceful Paper Flight' },
-    { id: 'blossom', name: 'Floral Petal Bloom', icon: '🌸', desc: 'Sakura & Rose Cascade' },
-    { id: 'trophy', name: 'Trophy Cannon Fanfare', icon: '🏆', desc: 'Golden Streamer Blast' },
-    { id: 'chalkboard', name: 'Chalkboard Wisdom Magic', icon: '✏️', desc: 'Glowing Chalk Sparks' },
+  const animationOptions: { id: CelebrationAnimationType; name: string; icon: React.ReactNode; desc: string }[] = [
+    { id: 'fireworks', name: 'Fireworks Burst', icon: <Sparkles className="w-4 h-4 text-amber-500" />, desc: 'Starry Rocket Flashes' },
+    { id: 'balloons', name: 'Sky Balloons & Lanterns', icon: <PartyPopper className="w-4 h-4 text-rose-500" />, desc: 'Buoyant Floating Joy' },
+    { id: 'origami', name: 'Peace Cranes Soar', icon: <Feather className="w-4 h-4 text-cyan-600" />, desc: 'Graceful Paper Flight' },
+    { id: 'blossom', name: 'Floral Petal Bloom', icon: <Flower2 className="w-4 h-4 text-pink-500" />, desc: 'Sakura & Rose Cascade' },
+    { id: 'trophy', name: 'Trophy Cannon Fanfare', icon: <Trophy className="w-4 h-4 text-amber-600" />, desc: 'Golden Streamer Blast' },
+    { id: 'chalkboard', name: 'Chalkboard Wisdom Magic', icon: <PenTool className="w-4 h-4 text-emerald-600" />, desc: 'Glowing Chalk Sparks' },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -125,7 +151,7 @@ export const SendGiftModal: React.FC<SendGiftModalProps> = ({
       studentGroup: studentGroup.trim() || undefined,
       giftId: chosenGift.id,
       giftName: chosenGift.name,
-      giftIcon: chosenGift.icon,
+      giftIcon: chosenGift.iconName,
       giftDescription: chosenGift.desc,
       wrapStyle,
       animationType,
@@ -153,8 +179,10 @@ export const SendGiftModal: React.FC<SendGiftModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-[#121212] bg-[#F1FAEE]">
           <div className="flex items-center gap-2">
-            <span className="neo-border-2 bg-[#E9C46A] p-1 text-sm">🎁</span>
-            <h3 className="font-black uppercase tracking-tight italic font-sans text-lg text-[#121212]">
+            <span className="neo-border-2 bg-[#E9C46A] p-1.5 flex items-center justify-center">
+              <Gift className="w-4 h-4 text-[#121212]" />
+            </span>
+            <h3 className="font-black uppercase tracking-tight italic font-sans text-lg text-[#121212] heading-pop">
               Send a Surprise Gift to an Educator
             </h3>
           </div>
@@ -170,8 +198,9 @@ export const SendGiftModal: React.FC<SendGiftModalProps> = ({
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
           {error && (
-            <div className="p-3 bg-[#E63946]/10 neo-border-2 border-[#E63946] text-[#E63946] text-xs font-black uppercase">
-              ⚠️ {error}
+            <div className="p-3 bg-[#E63946]/10 neo-border-2 border-[#E63946] text-[#E63946] text-xs font-black uppercase flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-[#E63946]" />
+              <span>{error}</span>
             </div>
           )}
 
@@ -216,7 +245,7 @@ export const SendGiftModal: React.FC<SendGiftModalProps> = ({
                     }`}
                   >
                     <div>
-                      <span className="text-2xl block mb-1">{g.icon}</span>
+                      {g.renderIcon()}
                       <span className="text-xs font-black uppercase tracking-tight block leading-tight">
                         {g.name}
                       </span>
@@ -260,8 +289,9 @@ export const SendGiftModal: React.FC<SendGiftModalProps> = ({
           {/* Celebratory Reveal Animation Picker */}
           <div className="bg-[#F1FAEE] neo-border-2 p-3.5 neo-shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-xs font-black uppercase text-[#121212] tracking-wider">
-                🌟 Choose Unique Celebratory Reveal Animation *
+              <label className="block text-xs font-black uppercase text-[#121212] tracking-wider flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                <span>Choose Unique Celebratory Reveal Animation *</span>
               </label>
               <span className="text-[10px] font-black uppercase text-[#E63946]">
                 Plays Live Upon Reveal!
@@ -284,7 +314,7 @@ export const SendGiftModal: React.FC<SendGiftModalProps> = ({
                   }`}
                 >
                   <div className="flex items-center gap-1.5">
-                    <span className="text-lg">{a.icon}</span>
+                    {a.icon}
                     <span className="text-xs font-black uppercase tracking-tight">{a.name}</span>
                   </div>
                   <span className="text-[9px] text-[#121212]/70 block mt-0.5 font-medium">

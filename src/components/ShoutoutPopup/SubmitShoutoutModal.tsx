@@ -67,7 +67,7 @@ export const SubmitShoutoutModal: React.FC<SubmitShoutoutModalProps> = ({
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-[#121212] bg-[#F1FAEE]">
           <div className="flex items-center gap-2">
             <MessageSquareHeart className="w-5 h-5 text-[#E63946]" />
-            <h3 className="font-black uppercase tracking-tight italic font-sans text-lg text-[#121212]">
+            <h3 className="font-black uppercase tracking-tight italic font-sans text-lg text-[#121212] heading-pop">
               Post a Note of Gratitude
             </h3>
           </div>
@@ -147,7 +147,7 @@ export const SubmitShoutoutModal: React.FC<SubmitShoutoutModalProps> = ({
               onChange={(e) => setTeacherId(e.target.value)}
               className="w-full px-3.5 py-2 neo-border-2 bg-[#F1FAEE] text-xs font-bold text-[#121212] focus:bg-white focus:outline-none"
             >
-              <option value="all">🌟 All Educators (Universal Tribute)</option>
+              <option value="all">★ All Educators (Universal Tribute)</option>
               {teachers.map((t) => (
                 <option key={t.id} value={t.id}>
                   {t.name} ({t.department})

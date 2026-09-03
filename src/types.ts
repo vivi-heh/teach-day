@@ -1,6 +1,6 @@
-export type CelebrationAnimationType = 'fireworks' | 'balloons' | 'origami' | 'blossom' | 'trophy' | 'chalkboard';
+export type CelebrationAnimationType = 'fireworks' | 'balloons' | 'origami' | 'blossom' | 'trophy' | 'chalkboard' | 'matrix';
 
-export type GiftWrapStyle = 'crimson' | 'gold' | 'emerald' | 'bento' | 'midnight' | 'teal' | 'ochre' | 'slate';
+export type GiftWrapStyle = 'crimson' | 'gold' | 'emerald' | 'bento' | 'midnight' | 'teal' | 'ochre' | 'slate' | 'cyber';
 
 export interface StudentGift {
   id: string;
@@ -63,7 +63,7 @@ export interface GreetingCard {
   teacherName: string;
   senderName: string;
   senderRole: string; // e.g. 'Class of 2024', 'Grade 10-A', 'Alumni'
-  theme: 'chalkboard' | 'watercolor' | 'golden' | 'origami' | 'vintage';
+  theme: 'chalkboard' | 'watercolor' | 'golden' | 'origami' | 'vintage' | 'cyber';
   headline: string;
   frontDesign: string;
   message: string;
@@ -107,7 +107,7 @@ export interface CelebrationRevealItem {
   icon?: string;
   badgeName?: string;
   wrapStyle?: GiftWrapStyle;
-  cardTheme?: 'golden' | 'chalkboard' | 'watercolor' | 'origami' | 'vintage';
+  cardTheme?: 'golden' | 'chalkboard' | 'watercolor' | 'origami' | 'vintage' | 'cyber';
   headline?: string;
   animationType?: CelebrationAnimationType;
   date?: string;

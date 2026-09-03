@@ -173,7 +173,7 @@ export const SurpriseShoutoutPopup: React.FC<SurpriseShoutoutPopupProps> = ({
               onClick={() => setIsMinimized(false)}
               className="p-3 bg-[#E9C46A] hover:bg-[#F4A261] text-[#121212] neo-border neo-shadow flex items-center gap-2 text-xs font-black uppercase cursor-pointer"
             >
-              <span>🎉</span>
+              <Sparkles className="w-4 h-4 text-[#E63946]" />
               <span className="hidden sm:inline">Surprise Shout-outs</span>
             </motion.button>
           )}
